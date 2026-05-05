@@ -67,7 +67,7 @@ if st.button("Jalankan Simulasi"):
                 ax.bar(["Potensi Air", "Output Listrik"], [daya_ideal, daya_nyata], color=['#0077b6', '#00b4d8'])
                 ax.set_ylabel("Daya (kW)")
                 ax.set_title("Visualisasi Energi Terkonversi")
-                st.pyplot(fig) [cite: 24]
+                st.pyplot(fig) 
 
             else:
                 if eta > 0:
