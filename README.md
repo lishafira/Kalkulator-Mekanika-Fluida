@@ -1,2 +1,3 @@
-# Kalkulator-Mekanika-Fluida
-Tugas Besar Mekanika Fluida yang mencakup perhitungan estimasi daya turbin dan daya pompa
+# Cara run di terminalnya: python -m streamlit run Tubes_Mekflu.py
+# Sebelum run install streamlit dulu dengan command: pip install streamlit matplotlib numpy
+# Sudah termasuk matplotlib dan numpy :)
