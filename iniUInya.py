@@ -1,6 +1,6 @@
 import streamlit as st
 import matplotlib.pyplot as plt
-import app_logic as logic  # Mengimpor logika dari file sebelah
+import app_logic as logic 
 
 st.set_page_config(page_title="Kalkulator Mekflu", layout="wide")
 
