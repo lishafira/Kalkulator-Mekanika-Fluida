@@ -2,8 +2,6 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-#CARA NGERUN NYA: python -m streamlit run Tubes_Mekflu.py
-
 st.set_page_config(page_title="Kalkulator Mekanika Fluida", layout="centered")
 
 st.title("Aplikasi Perhitungan Sistem Fluida")
