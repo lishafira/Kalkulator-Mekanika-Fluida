@@ -2,72 +2,65 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perhitungan Daya Turbin</title>
     <link rel="stylesheet" href="style.css">
+    <title>Perhitungan Daya Turbin</title>
 </head>
 <body>
-    <div class="main-wrapper">
-        <aside class="sidebar">
+    <div class="dashboard">
+        <div class="sidebar">
             <header>
-                <h2>FLUID CONTROL</h2>
-                <p>Sistem Estimasi Daya Turbin</p>
+                <h1>FLUID CONTROL</h1>
+                <p>Sistem Estimasi Daya</p>
             </header>
 
-            <div class="input-section">
-                <div class="field">
-                    <label>DEBIT ALIRAN (Q)</label>
-                    <div class="input-wrapper">
-                        <input type="number" id="debit" value="0.00" step="0.01">
-                        <span class="unit">m³/s</span>
-                        <div class="spinner">
-                            <button onclick="adjust('debit', 0.01)">▲</button>
-                            <button onclick="adjust('debit', -0.01)">▼</button>
-                        </div>
+            <div class="input-group">
+                <label>DEBIT ALIRAN (Q)</label>
+                <div class="input-field">
+                    <input type="number" id="debit" placeholder="0.00" step="0.01">
+                    <div class="spinner">
+                        <button onclick="adjust('debit', 0.01)">▲</button>
+                        <button onclick="adjust('debit', -0.01)">▼</button>
                     </div>
-                </div>
-
-                <div class="field">
-                    <label>HEAD TEKANAN (H)</label>
-                    <div class="input-wrapper">
-                        <input type="number" id="head" value="0.00" step="0.1">
-                        <span class="unit">m</span>
-                        <div class="spinner">
-                            <button onclick="adjust('head', 0.1)">▲</button>
-                            <button onclick="adjust('head', -0.1)">▼</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label>EFISIENSI (η)</label>
-                    <div class="input-wrapper">
-                        <input type="number" id="efisiensi" value="0" step="1">
-                        <span class="unit">%</span>
-                        <div class="spinner">
-                            <button onclick="adjust('efisiensi', 1)">▲</button>
-                            <button onclick="adjust('efisiensi', -1)">▼</button>
-                        </div>
-                    </div>
+                    <span>m³/s</span>
                 </div>
             </div>
 
-            <button class="calc-btn" onclick="calculate()">HITUNG DAYA LISTRIK</button>
-
-            <div class="result-box">
-                <small>OUTPUT ENERGI</small>
-                <h1 id="result">0.00 kW</h1>
+            <div class="input-group">
+                <label>HEAD TEKANAN (H)</label>
+                <div class="input-field">
+                    <input type="number" id="head" placeholder="0.00" step="0.1">
+                    <div class="spinner">
+                        <button onclick="adjust('head', 0.1)">▲</button>
+                        <button onclick="adjust('head', -0.1)">▼</button>
+                    </div>
+                    <span>m</span>
+                </div>
             </div>
-        </aside>
+
+            <div class="input-group">
+                <label>EFISIENSI (η)</label>
+                <div class="input-field">
+                    <input type="number" id="efisiensi" placeholder="0" step="1">
+                    <div class="spinner">
+                        <button onclick="adjust('efisiensi', 1)">▲</button>
+                        <button onclick="adjust('efisiensi', -1)">▼</button>
+                    </div>
+                    <span>%</span>
+                </div>
+            </div>
+
+            <button class="btn-calc" onclick="calculate()">HITUNG DAYA LISTRIK</button>
+            <div class="status-bar">OUTPUT ENERGI (kW): <span id="result">0.00 kW</span></div>
+        </div>
+
+        <div class="visualizer">
+            <svg id="turbine-svg" viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="50" fill="none" stroke="#38bdf8" stroke-width="2"/>
+                <path id="blade" d="M100 20 L100 80 M100 120 L100 180 M20 100 L80 100 M120 100 L180 100" stroke="#38bdf8" stroke-width="4"/>
+            </svg>
+            <p id="turbine-status">TURBINE STATUS: IDLE</p>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
-
-<section class="visual-area">
-    <svg id="turbineSVG" class="turbine" viewBox="0 0 200 200">
-        <circle cx="100" cy="100" r="30" fill="none" stroke="#38bdf8" stroke-width="4" stroke-dasharray="10 5"/>
-        <line x1="100" y1="70" x2="100" y2="130" stroke="#38bdf8" stroke-width="2"/>
-        <line x1="70" y1="100" x2="130" y2="100" stroke="#38bdf8" stroke-width="2"/>
-    </svg>
-</section>
 </html>
