@@ -1,142 +1,36 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 0.05em;
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Orbitron', sans-serif; }
+body { background:#0b0f19; color:#fff; min-height:100vh; display:flex; justify-content:center; align-items:center; padding: 20px; }
+
+.main-wrapper { 
+    display:grid; grid-template-columns: 350px 1fr; width: 100%; max-width: 1000px; height: 600px; 
+    background:#131a2c; border-radius:20px; border:1px solid #1e293b; overflow:hidden; 
 }
 
-body {
-    background: #0b0f19;
-    color: #e2e8f0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+.sidebar { padding: 2.5rem; display:flex; flex-direction:column; gap: 1.5rem; border-right:1px solid #1e293b; }
+.input-section { display:flex; flex-direction:column; gap: 1.2rem; }
+.field label { font-size: 0.65rem; color: #94a3b8; font-weight: 700; margin-bottom: 0.5rem; display: block; }
 
-.main-wrapper {
-    display: grid;
-    grid-template-columns: 380px 1fr;
-    width: 950px;
-    height: 550px;
-    background: #131a2c;
-    border-radius: 20px;
-    border: 1px solid #1e293b;
-    overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+.input-group { 
+    display:flex; align-items:center; background:#0f172a; border:1px solid #334155; 
+    border-radius:6px; padding: 0 15px; height: 45px; 
 }
+input { background:none; border:none; color:#fff; width:100%; outline:none; font-size:1rem; }
+/* Menghilangkan panah spinner */
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
+.unit { color:#38bdf8; font-size:0.7rem; font-weight:bold; margin-left:10px; }
 
-.sidebar {
-    padding: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    border-right: 1px solid #1e293b;
+.calc-btn { 
+    background:#38bdf8; color:#0b0f19; border:none; padding:12px; border-radius:6px; 
+    font-weight:bold; cursor:pointer; transition:0.3s; margin-top:0.5rem;
 }
+.calc-btn:hover { background:#bae6fd; }
 
-.sidebar header h2 {
-    color: #38bdf8;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-}
+.result-box { margin-top: auto; background:#0f172a; padding:15px; border-radius:8px; border-left:4px solid #38bdf8; }
+.result-box small { color:#94a3b8; font-size:0.6rem; }
+.result-box h1 { color:#38bdf8; font-size:1.5rem; }
 
-.sidebar header p {
-    font-size: 0.7rem;
-    color: #94a3b8;
+.visual-area { 
+    display:flex; justify-content:center; align-items:center; 
+    background:radial-gradient(circle, #1e293b, #0b0f19); padding: 20px;
 }
-
-.input-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.field label {
-    display: block;
-    font-size: 0.65rem;
-    color: #94a3b8;
-    font-weight: 700;
-    margin-bottom: 0.8rem;
-}
-
-.input-group {
-    display: flex;
-    align-items: center;
-    background: #0f172a;
-    border: 1px solid #334155;
-    border-radius: 10px;
-    padding: 0 18px;
-    height: 50px;
-    transition: 0.3s;
-}
-
-.input-group:focus-within {
-    border-color: #38bdf8;
-    box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
-}
-
-.input-group input {
-    background: none;
-    border: none;
-    color: #fff;
-    width: 100%;
-    outline: none;
-    font-size: 1rem;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.unit {
-    color: #38bdf8;
-    font-size: 0.75rem;
-    font-weight: bold;
-    margin-left: 10px;
-}
-
-.calc-btn {
-    background: #38bdf8;
-    color: #0b0f19;
-    border: none;
-    padding: 16px;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.4s;
-    text-transform: uppercase;
-}
-
-.calc-btn:hover {
-    background: #bae6fd;
-    transform: translateY(-2px);
-}
-
-.result-box {
-    margin-top: auto;
-    padding: 20px;
-    border-radius: 12px;
-    background: #0f172a;
-    border-left: 5px solid #38bdf8;
-}
-
-.result-box small {
-    font-size: 0.6rem;
-    color: #94a3b8;
-}
-
-.result-box h1 {
-    color: #38bdf8;
-    font-size: 1.6rem;
-    margin-top: 5px;
-}
-
-.visual-area {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: radial-gradient(circle, #1e293b, #0b0f19);
-}
+#turbineSVG { width: 80%; max-width: 300px; height: auto; }
