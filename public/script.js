@@ -1,26 +1,39 @@
-let turbine = gsap.to("#turbineSVG", { rotation: 360, duration: 4, repeat: -1, ease: "none" });
+let turbineTween = gsap.to("#turbineSVG", {
+    rotation: 360,
+    duration: 4,
+    repeat: -1,
+    ease: "none"
+});
 
 async function calculatePower() {
-    const d = document.getElementById('debit').value;
-    const h = document.getElementById('head').value;
-    const e = document.getElementById('efisiensi').value;
+    const debit = parseFloat(document.getElementById('debit').value) || 0;
+    const head = parseFloat(document.getElementById('head').value) || 0;
+    const efisiensi = parseFloat(document.getElementById('efisiensi').value) || 0;
 
-    const res = await fetch('/calculate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ debit: d, head: h, efisiensi: e })
+    if (debit <= 0 || head <= 0) {
+        alert("Mohon masukkan nilai Debit dan Head yang valid.");
+        return;
+    }
+
+    const power = 9.81 * debit * head * (efisiensi / 100);
+    updateResultUI(power);
+    updateTurbineAnimation(power);
+}
+
+function updateResultUI(power) {
+    gsap.to("#result", {
+        duration: 0.8,
+        textContent: power.toFixed(2) + " kW",
+        roundProps: "textContent",
+        ease: "power2.out"
     });
-    
-    const data = await res.json();
-    const kw = (data.power / 1000).toFixed(2);
-    
-    gsap.to("#result", { textContent: kw, duration: 1, roundProps: "textContent", onUpdate: function() {
-        this.targets()[0].innerText = this.targets()[0].innerText + " kW";
-    }});
+}
 
-    let speed = Math.max(0.15, 4 - (kw / 400));
-    gsap.to(turbine, { timeScale: 4 / speed, duration: 1, ease: "power2.out" });
-
-    let color = kw > 2000 ? "#f59e0b" : (kw > 500 ? "#4ade80" : "#38bdf8");
-    gsap.to("#turbineSVG", { stroke: color, filter: `drop-shadow(0 0 20px ${color})`, duration: 0.8 });
+function updateTurbineAnimation(power) {
+    const speed = Math.max(0.5, 4 - (power / 1000));
+    
+    gsap.to(turbineTween, {
+        duration: 1,
+        timeScale: 4 / speed
+    });
 }
