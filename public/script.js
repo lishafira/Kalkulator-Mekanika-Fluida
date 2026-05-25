@@ -12,17 +12,19 @@ function adjust(id, delta) {
 }
 
 function calculate() {
+    // 1. Lakukan perhitungan
     const Q = parseFloat(document.getElementById('debit').value) || 0;
     const H = parseFloat(document.getElementById('head').value) || 0;
     const eta = (parseFloat(document.getElementById('efisiensi').value) || 0) / 100;
-    
-    //P = rho * g * Q * H * eta
-    // rho = 1000 kg/m^3, g = 9.81 m/s^2
-    const rho = 1000;
-    const g = 9.81;
-    const P = (rho * g * Q * H * eta) / 1000; 
-    
+    const P = (1000 * 9.81 * Q * H * eta) / 1000;
     document.getElementById('result').innerText = P.toFixed(2) + " kW";
+
+    const turbine = document.querySelector('.turbine');
+    turbine.classList.add('active');
+
+    setTimeout(() => {
+        turbine.classList.remove('active');
+    }, 3000);
 }
 
 document.querySelectorAll('input').forEach(input => {

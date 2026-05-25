@@ -21,3 +21,11 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-app
 
 .calc-btn { width: 100%; padding: 15px; background: #38bdf8; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
 .result-box { background: #0f172a; padding: 20px; border-radius: 12px; border-left: 4px solid #38bdf8; margin-top: 10px; }
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.turbine.active {
+    animation: spin 2s linear infinite; 
+}
