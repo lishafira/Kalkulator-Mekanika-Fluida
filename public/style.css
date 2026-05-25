@@ -1,204 +1,205 @@
-/* ==========================================================================
-   RESET & BASE STYLES
-   ========================================================================== */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 0.06em;
+}
+
+:root {
+    --bg-dark-base: #0b0f19;
+    --bg-panel-dark: #131a2c;
+    --neon-blue: #38bdf8;
+    --border-color: rgba(56, 189, 248, 0.2);
 }
 
 body {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background-color: var(--bg-dark-base);
     color: #f8fafc;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
     overflow-x: hidden;
 }
 
-/* ==========================================================================
-   MAIN CONTAINER (FULL SCREEN & FLEXIBLE)
-   ========================================================================== */
-#app {
-    background: rgba(30, 41, 59, 0.6);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    width: 100%;
-    
-    /* Membuat ukuran container adaptif dan fleksibel di PC */
-    max-width: 1200px; 
-    min-height: 80vh;
-    
-    display: flex;
-    flex-direction: column; /* Default untuk mobile: menumpuk vertikal */
-    overflow: hidden;
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 100vh;
 }
 
-/* Pembagian Area Konten Utama menjadi 2 Sektor di Desktop
-   -------------------------------------------------------------------------- */
-.form-section {
+@media (min-width: 992px) {
+    .dashboard-container {
+        grid-template-columns: 450px 1fr;
+    }
+}
+
+.control-panel {
+    background-color: var(--bg-panel-dark);
     padding: 2.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    flex: 1;
+    justify-content: space-between;
+    border-right: 2px solid var(--border-color);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
 }
 
-.visual-section {
-    position: relative;
-    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+.panel-header h2 {
+    font-size: 1.8rem;
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    margin-bottom: 0.3rem;
+}
+
+.panel-header p {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.input-group-container {
+    margin: 2.5rem 0;
+}
+
+.input-box {
+    margin-bottom: 1.5rem;
+}
+
+.input-box label {
+    display: block;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.2rem 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.input-wrapper:focus-within {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+.input-wrapper input {
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    color: #fff;
+    padding: 0.6rem 0;
+    font-size: 1.1rem;
+}
+
+.input-wrapper .unit {
+    font-size: 0.8rem;
+    color: var(--neon-blue);
+    font-weight: bold;
+}
+
+.btn-calculate {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    color: white;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+    transition: all 0.2s ease;
+}
+
+.btn-calculate:hover {
+    filter: brightness(1.15);
+    box-shadow: 0 4px 20px rgba(56, 189, 248, 0.6);
+}
+
+.result-display {
+    margin-top: 2rem;
+    background-color: rgba(15, 23, 42, 0.8);
+    border: 1px solid var(--border-color);
+    padding: 1.2rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.result-label {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.power-output {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--neon-blue);
+    text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+}
+
+.visual-panel {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 250px; /* Tinggi minimum area visual di HP */
-    flex: 1;
-    overflow: hidden;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    position: relative;
+    padding: 2rem;
 }
 
-/* ==========================================================================
-   TYPOGRAPHY & INPUTS
-   ========================================================================== */
-h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #38bdf8;
-    text-align: center;
-    margin-bottom: 2rem;
-    letter-spacing: -0.025em;
-    border-bottom: 2px solid rgba(56, 189, 248, 0.15);
-    padding-bottom: 12px;
+.visual-wrapper {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.input-group {
-    margin-bottom: 1.25rem;
-}
-
-.input-group label {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #94a3b8;
-    margin-bottom: 0.5rem;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 12px 16px;
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid rgba(148, 163, 184, 0.25);
-    border-radius: 12px;
-    color: #fff;
-    font-size: 1rem;
-    transition: all 0.2s ease;
-}
-
-.input-group input:focus {
-    outline: none;
-    border-color: #38bdf8;
-    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
-    background: rgba(15, 23, 42, 0.8);
-}
-
-/* Menghilangkan spinner bawaan input */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* ==========================================================================
-   BUTTON & RESULT BOX
-   ========================================================================== */
-button {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    margin-top: 0.5rem;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-    transition: all 0.2s ease;
-}
-
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
-}
-
-#result-container {
-    margin-top: 1.75rem;
-    padding: 1.25rem;
-    background: rgba(15, 23, 42, 0.4);
-    border-radius: 16px;
-    border: 1px dashed rgba(148, 163, 184, 0.2);
-    text-align: center;
-}
-
-#result-container h3 {
-    font-size: 0.85rem;
-    color: #94a3b8;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
-}
-
-#result {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #38bdf8;
-    text-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
-}
-
-/* ==========================================================================
-   ANIMATION ELEMENTS
-   ========================================================================== */
-.water-flow {
+.water-pipe-stream {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.12;
-    background-image: linear-gradient(0deg, transparent 50%, #38bdf8 50%);
-    background-size: 100% 30px;
-    pointer-events: none;
+    left: 10px;
+    width: 40px;
+    height: 140px;
+    background: linear-gradient(90deg, #0284c7 0%, #38bdf8 50%, #0284c7 100%);
+    background-size: 100% 60px;
+    opacity: 0.7;
+    border-radius: 4px;
+    filter: drop-shadow(0 0 8px #38bdf8);
+}
+
+.turbine-housing {
+    width: 240px;
+    height: 240px;
+    background: rgba(15, 23, 42, 0.8);
+    border: 3px solid var(--border-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
 }
 
 #turbineSVG {
-    z-index: 2;
-    transform-origin: center;
-    filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.5));
-    width: 45%; /* Menyesuaikan ukuran turbin agar dinamis di PC */
-    max-width: 300px;
-    height: auto;
+    width: 190px;
+    height: 190px;
+    filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.4));
 }
 
-/* ==========================================================================
-   RESPONSIVE DESIGN: PC MODE (GRID / SIDE-BY-SIDE LAYOUT)
-   ========================================================================== */
-@media (min-width: 768px) {
-    #app {
-        flex-direction: row; /* Berubah jadi menyamping di Desktop PC */
-    }
+#turbineSVG .turbine-core {
+    fill: #1e293b;
+    stroke: var(--neon-blue);
+    stroke-width: 3;
+}
 
-    .form-section {
-        flex: 0 0 45%; /* Sektor form mengambil 45% lebar layar container */
-        border-right: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .visual-section {
-        flex: 0 0 55%; /* Sektor animasi mengambil ruang sisa yang besar (55%) */
-        border-top: none;
-    }
+#turbineSVG .blade {
+    fill: none;
+    stroke: var(--neon-blue);
+    stroke-width: 5;
+    stroke-linecap: round;
 }
