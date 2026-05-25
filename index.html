@@ -5,7 +5,6 @@
     <title>Perhitungan Daya Turbin</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
 <body>
     <div class="main-wrapper">
@@ -20,34 +19,20 @@
                     <label>DEBIT ALIRAN (Q)</label>
                     <div class="input-group">
                         <input type="number" id="debit" placeholder="0.00" step="0.01">
-                        <div class="custom-spinner">
-                            <span onclick="document.getElementById('debit').stepUp()">▲</span>
-                            <span onclick="document.getElementById('debit').stepDown()">▼</span>
-                        </div>
                         <span class="unit">m³/s</span>
                     </div>
                 </div>
-
                 <div class="field">
                     <label>HEAD TEKANAN (H)</label>
                     <div class="input-group">
                         <input type="number" id="head" placeholder="0.00" step="0.1">
-                        <div class="custom-spinner">
-                            <span onclick="document.getElementById('head').stepUp()">▲</span>
-                            <span onclick="document.getElementById('head').stepDown()">▼</span>
-                        </div>
                         <span class="unit">m</span>
                     </div>
                 </div>
-
                 <div class="field">
-                    <label>EFISIENSI SISTEM (η)</label>
+                    <label>EFISIENSI (η)</label>
                     <div class="input-group">
                         <input type="number" id="efisiensi" placeholder="0">
-                        <div class="custom-spinner">
-                            <span onclick="document.getElementById('efisiensi').stepUp()">▲</span>
-                            <span onclick="document.getElementById('efisiensi').stepDown()">▼</span>
-                        </div>
                         <span class="unit">%</span>
                     </div>
                 </div>
