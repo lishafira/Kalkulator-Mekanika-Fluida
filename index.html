@@ -7,10 +7,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="main-wrapper">
         <aside class="sidebar">
-            <header class="header">
+            <header>
                 <h2>FLUID CONTROL</h2>
                 <p>Sistem Estimasi Daya Turbin</p>
             </header>
@@ -18,38 +17,49 @@
             <div class="input-section">
                 <div class="field">
                     <label>DEBIT ALIRAN (Q)</label>
-                    <div class="input-container">
-                        <input type="number" id="debit" placeholder="0.00" step="0.01">
+                    <div class="input-wrapper">
+                        <input type="number" id="debit" value="0.00" step="0.01">
                         <span class="unit">m³/s</span>
+                        <div class="spinner">
+                            <button onclick="adjust('debit', 0.01)">▲</button>
+                            <button onclick="adjust('debit', -0.01)">▼</button>
+                        </div>
                     </div>
                 </div>
 
                 <div class="field">
                     <label>HEAD TEKANAN (H)</label>
-                    <div class="input-container">
-                        <input type="number" id="head" placeholder="0.00" step="0.1">
+                    <div class="input-wrapper">
+                        <input type="number" id="head" value="0.00" step="0.1">
                         <span class="unit">m</span>
+                        <div class="spinner">
+                            <button onclick="adjust('head', 0.1)">▲</button>
+                            <button onclick="adjust('head', -0.1)">▼</button>
+                        </div>
                     </div>
                 </div>
 
                 <div class="field">
                     <label>EFISIENSI (η)</label>
-                    <div class="input-container">
-                        <input type="number" id="efisiensi" placeholder="0">
+                    <div class="input-wrapper">
+                        <input type="number" id="efisiensi" value="0" step="1">
                         <span class="unit">%</span>
+                        <div class="spinner">
+                            <button onclick="adjust('efisiensi', 1)">▲</button>
+                            <button onclick="adjust('efisiensi', -1)">▼</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <button class="calc-btn" onclick="calculatePower()">HITUNG DAYA LISTRIK</button>
+            <button class="calc-btn" onclick="calculate()">HITUNG DAYA LISTRIK</button>
 
             <div class="result-box">
-                <small>OUTPUT ENERGI GENERATOR</small>
+                <small>OUTPUT ENERGI</small>
                 <h1 id="result">0.00 kW</h1>
             </div>
         </aside>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
