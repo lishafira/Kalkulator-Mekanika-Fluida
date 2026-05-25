@@ -1,0 +1,12 @@
+{
+  "name": "turbin-app",
+  "version": "1.0.0",
+  "description": "Aplikasi estimasi daya turbin air",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.22.2"
+  }
+}
