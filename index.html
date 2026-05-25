@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Dashboard Turbin Air - Kontrol Fluida</title>
+    <title>Perhitungan Daya Turbin - Kontrol Fluida</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,29 +23,20 @@
                 <p>Sistem Estimasi Daya Hidroelektrik</p>
             </header>
             
-            <div class="input-group-container">
+            <div class="input-group">
                 <div class="input-box">
                     <label for="debit">DEBIT ALIRAN ($Q$)</label>
-                    <div class="input-wrapper">
-                        <input type="number" id="debit" placeholder="0.00" step="0.01" min="0">
-                        <span class="unit">m³/s</span>
-                    </div>
+                    <input type="number" id="debit" placeholder="0.00" step="0.01">
                 </div>
                 
                 <div class="input-box">
                     <label for="head">HEAD TEKANAN ($H$)</label>
-                    <div class="input-wrapper">
-                        <input type="number" id="head" placeholder="0.00" step="0.1" min="0">
-                        <span class="unit">meter</span>
-                    </div>
+                    <input type="number" id="head" placeholder="0.00" step="0.1">
                 </div>
                 
                 <div class="input-box">
                     <label for="efisiensi">EFISIENSI SISTEM ($\eta$)</label>
-                    <div class="input-wrapper">
-                        <input type="number" id="efisiensi" placeholder="0" min="0" max="100">
-                        <span class="unit">%</span>
-                    </div>
+                    <input type="number" id="efisiensi" placeholder="0">
                 </div>
             </div>
             
@@ -53,21 +44,26 @@
                 HITUNG DAYA LISTRIK
             </button>
             
-            <footer class="result-display">
-                <span class="result-label">OUTPUT ENERGI GENERATOR</span>
-                <div id="result" class="power-output">0.00 kW</div>
-            </footer>
+            <div class="result-display">
+                <p class="result-label">OUTPUT ENERGI GENERATOR</p>
+                <h1 id="result" class="power-output">0.00 kW</h1>
+            </div>
         </main>
         
         <section class="visual-panel">
             <div class="visual-wrapper">
-                <div id="waterFlow" class="water-pipe-stream"></div>
-                
-                <div class="turbine-housing">
-                    <svg id="turbineSVG" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="100" cy="100" r="25" class="turbine-core" />
-                        <path d="M100,75 C115,50 135,65 120,88" class="blade" />
-                        <path d="M125,100 C150,115 135,135 112,120" class="blade" />
-                        <path d="M100,125 C85,150 65,135 80,112" class="blade" />
-                        <path d="M75,100 C50,85 65,65 88,80" class="blade" />
-                        <circle cx="100"
+                <svg id="turbineSVG" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="25" class="turbine-core" />
+                    <path d="M100,75 C115,50 135,65 120,88" class="blade" />
+                    <path d="M125,100 C150,115 135,135 112,120" class="blade" />
+                    <path d="M100,125 C85,150 65,135 80,112" class="blade" />
+                    <path d="M75,100 C50,85 65,65 88,80" class="blade" />
+                </svg>
+            </div>
+        </section>
+        
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
