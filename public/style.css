@@ -37,27 +37,8 @@ input { background: none; border: none; width: 100%; outline: none; font-size: 1
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
-
 @media (max-width: 768px) {
-    .dashboard-fixed {
-        width: 95% !important; 
-        height: auto !important; 
-        flex-direction: column; 
-        padding: 20px;
-    }
-
-    .panel-left {
-        width: 100% !important; 
-    }
-
-    .panel-right {
-        width: 100% !important; 
-        margin-top: 20px;
-        order: -1; 
-    }
-
-    #turbine-svg {
-        width: 150px; 
-        height: 150px;
-    }
+    .dashboard { grid-template-columns: 1fr; width: 100%; padding: 20px; }
+    .visualizer { order: -1; }
+    #turbine-svg { width: 180px; height: 180px; }
 }
