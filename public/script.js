@@ -4,40 +4,36 @@ function adjust(id, delta) {
 }
 
 function calculate() {
+    // 1. Ambil nilai input
     const Q = parseFloat(document.getElementById('debit').value) || 0;
     const H = parseFloat(document.getElementById('head').value) || 0;
     const eta = (parseFloat(document.getElementById('efisiensi').value) || 0) / 100;
     
+    // 2. Hitung daya
     const P = (1000 * 9.81 * Q * H * eta) / 1000;
     document.getElementById('result').innerText = P.toFixed(2) + " kW";
-    const turbineSvg = document.getElementById('turbine-svg');
+    
+    // 3. Targetkan elemen SVG
+    const turbine = document.getElementById('turbine-svg');
     const statusText = document.getElementById('turbine-status');
     
-    turbineSvg.classList.remove('spinning');
+    // 4. Reset & Logika Animasi
+    turbine.classList.remove('spinning'); 
     
     if (P > 0) {
         let color = P >= 2000 ? "#ff7f00" : (P >= 500 ? "#00ff7f" : "#38bdf8");
-        turbineSvg.querySelectorAll('circle, path, line').forEach(el => {
-            el.style.stroke = color;
-            el.style.filter = `drop-shadow(0 0 8px ${color})`;
-        });
-
-        void turbineSvg.offsetWidth; 
-        
-        turbineSvg.classList.add('spinning');
+        turbine.style.stroke = color;
+        turbine.style.filter = `drop-shadow(0 0 10px ${color})`;
+        void turbine.offsetWidth; 
+        turbine.classList.add('spinning');
         statusText.innerText = "TURBINE STATUS: ACTIVE";
         statusText.style.color = color;
     } else {
-        // Kondisi jika 0, hentikan semuanya
-        turbineSvg.classList.remove('spinning');
+        // Matikan jika P = 0
+        turbine.style.stroke = "#38bdf8";
+        turbine.style.filter = "none";
         statusText.innerText = "TURBINE STATUS: IDLE";
         statusText.style.color = "#38bdf8";
-        
-        // Reset warna ke default saat berhenti
-        turbineSvg.querySelectorAll('circle, path, line').forEach(el => {
-            el.style.stroke = "#38bdf8";
-            el.style.filter = "none";
-        });
     }
 }
 l
