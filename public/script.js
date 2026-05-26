@@ -1,34 +1,35 @@
 function adjust(id, delta) {
     const input = document.getElementById(id);
-    input.value = (parseFloat(input.value) + delta).toFixed(id === 'efisiensi' ? 0 : 2);
+    input.value = (parseFloat(input.value || 0) + delta).toFixed(2);
 }
 
 function calculate() {
     const Q = parseFloat(document.getElementById('debit').value) || 0;
     const H = parseFloat(document.getElementById('head').value) || 0;
     const eta = (parseFloat(document.getElementById('efisiensi').value) || 0) / 100;
-    const P = (1000 * 9.81 * Q * H * eta) / 1000;
     
+    const P = (1000 * 9.81 * Q * H * eta) / 1000;
     document.getElementById('result').innerText = P.toFixed(2) + " kW";
     
-    const svg = document.getElementById('turbine-svg');
-    const status = document.getElementById('turbine-status');
-
-    // LOGIKA WARNA
-    let color = P > 2000 ? "#ff7f00" : (P >= 500 ? "#00ff7f" : "#38bdf8");
+    const turbine = document.getElementById('turbine-svg');
+    const statusText = document.getElementById('turbine-status');
+    
+    turbine.classList.remove('spinning'); 
     
     if (P > 0) {
-        svg.style.stroke = color;
-        svg.style.filter = `drop-shadow(0 0 10px ${color})`;
-        svg.classList.add('spinning');
-        status.innerText = "TURBINE STATUS: ACTIVE";
-        status.style.color = color;
+        let color = P >= 2000 ? "#ff7f00" : (P >= 500 ? "#00ff7f" : "#38bdf8");
+        turbine.style.stroke = color;
+        turbine.style.filter = `drop-shadow(0 0 10px ${color})`;
+        void turbine.offsetWidth; 
+        turbine.classList.add('spinning');
+        statusText.innerText = "TURBINE STATUS: ACTIVE";
+        statusText.style.color = color;
     } else {
-        svg.style.stroke = "#38bdf8";
-        svg.style.filter = "none";
-        svg.classList.remove('spinning');
-        status.innerText = "TURBINE STATUS: IDLE";
-        status.style.color = "#38bdf8";
+        // Matikan jika P = 0
+        turbine.style.stroke = "#38bdf8";
+        turbine.style.filter = "none";
+        statusText.innerText = "TURBINE STATUS: IDLE";
+        statusText.style.color = "#38bdf8";
     }
 }
 l
