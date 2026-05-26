@@ -3,27 +3,41 @@ function adjust(id, delta) {
     input.value = (parseFloat(input.value || 0) + delta).toFixed(2);
 }
 
-function calculatePower() {
+function calculate() {
     const Q = parseFloat(document.getElementById('debit').value) || 0;
     const H = parseFloat(document.getElementById('head').value) || 0;
     const eta = (parseFloat(document.getElementById('efisiensi').value) || 0) / 100;
     
-    const P = (1000 * 9.81 * Q * H * eta) / 1000; 
+    const P = (1000 * 9.81 * Q * H * eta) / 1000;
     document.getElementById('result').innerText = P.toFixed(2) + " kW";
+    const turbineSvg = document.getElementById('turbine-svg');
+    const statusText = document.getElementById('turbine-status');
     
-    const turbine = document.querySelector('.turbine-rotor');
+    turbineSvg.classList.remove('spinning');
     
     if (P > 0) {
-        if (!turbine.classList.contains('spinning')) {
-            turbine.classList.add('spinning');
-        }
+        let color = P >= 2000 ? "#ff7f00" : (P >= 500 ? "#00ff7f" : "#38bdf8");
+        turbineSvg.querySelectorAll('circle, path, line').forEach(el => {
+            el.style.stroke = color;
+            el.style.filter = `drop-shadow(0 0 8px ${color})`;
+        });
+
+        void turbineSvg.offsetWidth; 
         
-        if (P < 500) { turbine.style.stroke = "#38bdf8"; } // Biru Cyan
-        else if (P < 2000) { turbine.style.stroke = "#00ff7f"; } // Hijau Neon
-        else { turbine.style.stroke = "#ff7f00"; } // Amber/Oranye
+        turbineSvg.classList.add('spinning');
+        statusText.innerText = "TURBINE STATUS: ACTIVE";
+        statusText.style.color = color;
     } else {
-        turbine.classList.remove('spinning'); 
-        turbine.style.stroke = "#38bdf8"; 
+        // Kondisi jika 0, hentikan semuanya
+        turbineSvg.classList.remove('spinning');
+        statusText.innerText = "TURBINE STATUS: IDLE";
+        statusText.style.color = "#38bdf8";
+        
+        // Reset warna ke default saat berhenti
+        turbineSvg.querySelectorAll('circle, path, line').forEach(el => {
+            el.style.stroke = "#38bdf8";
+            el.style.filter = "none";
+        });
     }
 }
 l
