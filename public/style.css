@@ -169,12 +169,10 @@ svg {
   text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
 }
 
-/* Transisi pergerakan warna yang halus */
 #turbine-rotor, #turbine-rotor circle, #turbine-rotor path, #fluid-flow, .stat-box span {
   transition: stroke 0.5s ease, fill 0.5s ease, filter 0.5s ease, color 0.5s ease;
 }
 
-/* Responsive HP Layout */
 @media (max-width: 768px) {
   .top-grid { grid-template-columns: 1fr; }
   .stats { grid-template-columns: repeat(2, 1fr); }

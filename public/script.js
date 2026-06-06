@@ -10,7 +10,6 @@ function calc() {
   const etaPct = parseFloat(document.getElementById('eta').value) || 0;
   const eta = etaPct / 100;
   
-  // P = rho * g * Q * H * eta
   const P = rho * g * Q * H * eta;
   const powerKW = P / 1000;
   
@@ -52,11 +51,9 @@ function calc() {
     if(flow) flow.style.animationDuration = (speedFactor * 1.2) + 's';
     
     if (powerKW > 0 && powerKW <= 5) {
-      // 2. Daya Rendah (0 s.d 5 kW) -> Putaran Pelan & Berwarna Kuning Amber
       graphicElements.forEach(el => el?.classList.add('status-low'));
       textElements.forEach(el => el?.classList.add('status-low-txt'));
     } else {
-      // 3. Daya Tinggi/Optimal (> 5 kW) -> Putaran Cepat & Berwarna Cyan Elektrik
       graphicElements.forEach(el => el?.classList.add('status-high'));
       textElements.forEach(el => el?.classList.add('status-high-txt'));
     }
