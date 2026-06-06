@@ -39,9 +39,9 @@ function calc() {
 }
 
 function resetCalc() {
-  document.getElementById('q').value = 0.00;
-  document.getElementById('h').value = 0.00;
-  document.getElementById('eta').value = 0.00;
+  document.getElementById('q').value = 0;
+  document.getElementById('h').value = 0;
+  document.getElementById('eta').value = 0;
   calc();
 }
 
