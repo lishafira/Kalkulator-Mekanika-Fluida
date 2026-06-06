@@ -31,6 +31,22 @@ function calculate() {
         statusText.innerText = "TURBINE STATUS: IDLE";
         statusText.style.color = "#38bdf8";
     }
+
+    const flows = document.querySelectorAll('.flow-animation');
+    const pump = document.querySelector('.pump-icon');
+
+    if (P > 0) {
+        flows.forEach(f => f.style.animationPlayState = 'running');
+        pump.style.animationPlayState = 'running';
+    } else {
+        flows.forEach(f => f.style.animationPlayState = 'paused');
+        pump.style.animationPlayState = 'paused';
+    }
+
+    document.getElementById('stat-q').innerText = Q;
+    document.getElementById('stat-h').innerText = H;
+    document.getElementById('stat-eff').innerText = eta * 100;
+    document.getElementById('stat-p').innerText = P.toFixed(2);
 }
 l
 document.querySelectorAll('input').forEach(input => {

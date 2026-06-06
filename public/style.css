@@ -42,3 +42,36 @@ input { background: none; border: none; width: 100%; outline: none; font-size: 1
     .visualizer { order: -1; }
     #turbine-svg { width: 180px; height: 180px; }
 }
+
+.pipe {
+    width: 100px;
+    height: 20px;
+    background: #e0e0e0;
+    position: relative;
+    overflow: hidden; 
+    border-radius: 10px;
+}
+
+.flow-animation {
+    width: 20px;
+    height: 100%;
+    background: #416bdf;
+    position: absolute;
+    left: -20px;
+    animation: flowMove 2s linear infinite;
+}
+
+@keyframes flowMove {
+    0% { left: -20px; }
+    100% { left: 100%; }
+}
+
+.pump-icon {
+    font-size: 40px;
+    animation: rotatePump 3s linear infinite;
+}
+
+@keyframes rotatePump {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
