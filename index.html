@@ -71,31 +71,45 @@
             <section class="card viz-card">
                 <h2>Live Preview: Sistem Turbin Mekanis</h2>
                 <div class="content">
-                    <svg viewBox="0 0 920 420">
-                        <path class="pipe-dark" d="M 50,80 L 350,80 L 350,260 L 410,260" />
-                        <path class="flow-cyan" id="fluid-flow" d="M 50,80 L 350,80 L 350,260 L 410,260" />
-                        
-                        <path d="M 390,250 L 420,255 L 420,265 L 390,270 Z" fill="#00f0ff" />
-                        
-                        <circle cx="480" cy="260" r="75" fill="#0b111e" stroke="#00f0ff" stroke-width="2" />
-                        <circle cx="480" cy="260" r="60" fill="none" stroke="#1e293b" stroke-dasharray="6 6" />
-                        
-                        <g class="turbine-rotor" id="turbine-rotor">
-                            <circle cx="480" cy="260" r="16" fill="#00f0ff" />
-                            <path d="M 480,190 L 480,330 M 410,260 L 550,260" stroke="#00f0ff" stroke-width="3" stroke-linecap="round"/>
-                            <circle cx="480" cy="190" r="8" fill="none" stroke="#00f0ff" stroke-width="2.5"/>
-                            <circle cx="480" cy="330" r="8" fill="none" stroke="#00f0ff" stroke-width="2.5"/>
-                            <circle cx="410" cy="260" r="8" fill="none" stroke="#00f0ff" stroke-width="2.5"/>
-                            <circle cx="550" cy="260" r="8" fill="none" stroke="#00f0ff" stroke-width="2.5"/>
-                        </g>
-                        
-                        <path class="pipe-dark" d="M 480,335 L 480,390 L 850,390" />
-                        <path class="flow-cyan-slow" id="drain-flow" d="M 480,335 L 480,390 L 850,390" />
-                        
-                        <text x="70" y="50" fill="#00f0ff" font-size="11" font-weight="bold" letter-spacing="1">HULU / PENSTOCK</text>
-                        <text x="730" y="365" fill="#475569" font-size="11" font-weight="bold" letter-spacing="1">TAILRACE (OUTLET)</text>
-                    </svg>
-                    
+                   <svg viewBox="0 0 920 420">
+                         <defs>
+                             <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                                 <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="1"/>
+                             </pattern>
+                             <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                 <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.15"/>
+                                 <stop offset="100%" stop-color="#00f0ff" stop-opacity="0.02"/>
+                             </linearGradient>
+                         </defs>
+                         <rect width="100%" height="100%" fill="#0f172a"/>
+                         <rect width="100%" height="100%" fill="url(#grid)" />
+
+                         <rect x="30" y="160" width="180" height="220" rx="15" fill="url(#grad1)" stroke="#1e293b" stroke-width="2" />
+                         <path class="water-dark" d="M 30,240 Q 75,235 120,240 T 210,240 L 210,380 L 30,380 Z" />
+                         <text x="120" y="195" fill="#64748b" font-size="11" font-weight="bold" text-anchor="middle" letter-spacing="1">RESERVOIR (SUMBER)</text>
+
+                         <rect x="710" y="40" width="180" height="220" rx="15" fill="url(#grad1)" stroke="#1e293b" stroke-width="2" />
+                         <path class="water-dark" d="M 710,130 Q 755,125 800,130 T 890,130 L 890,260 L 710,260 Z" />
+                         <text x="800" y="75" fill="#64748b" font-size="11" font-weight="bold" text-anchor="middle" letter-spacing="1">TANGKI ELEVASI</text>
+
+                         <path class="pipe-dark" d="M 120,260 L 120,300 L 400,300 M 520,300 L 800,300 L 800,150" />
+                         <path class="flow-dynamic" id="fluid-flow" d="M 120,260 L 120,300 L 400,300 M 520,300 L 800,300 L 800,150" />
+
+                         <circle cx="460" cy="300" r="65" fill="#0b111e" stroke="#1e293b" stroke-width="4" />
+                         <circle cx="460" cy="300" r="50" fill="none" stroke="#1e293b" stroke-dasharray="8 6" />
+
+                         <g class="turbine-rotor" id="turbine-rotor">
+                             <circle cx="460" cy="300" r="14" fill="#00f0ff" />
+                             <path d="M 460,235 L 460,365 M 395,300 L 525,300" stroke="#00f0ff" stroke-width="3" stroke-linecap="round"/>
+                             <circle cx="460" cy="235" r="8" fill="none" stroke="#00f0ff" stroke-width="2.5"/>
+                             <circle cx="460" cy="365" r="8" fill="none" stroke="#00f0ff" stroke-width="2.5"/>
+                             <circle cx="395" cy="300" r="8" fill="none" stroke="#00f0ff" stroke-width="2.5"/>
+                             <circle cx="525" cy="300" r="8" fill="none" stroke="#00f0ff" stroke-width="2.5"/>
+                         </g>
+
+                         <rect x="420" y="375" width="80" height="28" rx="6" fill="#090d16" stroke="#1e293b" />
+                         <text x="460" y="393" fill="#64748b" font-size="11" font-weight="bold" text-anchor="middle" letter-spacing="1">TURBIN</text>
+                    </svg>           
                     <div class="stats">
                         <div class="stat-box"><b>Debit (Q)</b><span id="sQ">0.02</span> <small>m³/s</small></div>
                         <div class="stat-box"><b>Head (H)</b><span id="sH">25</span> <small>m</small></div>

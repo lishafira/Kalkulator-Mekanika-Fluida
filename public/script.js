@@ -10,7 +10,7 @@ function calc() {
   const etaPct = parseFloat(document.getElementById('eta').value) || 0;
   const eta = etaPct / 100;
   
-  // Perhitungan Daya Turbin (Watt)
+  // P = rho * g * Q * H * eta
   const P = rho * g * Q * H * eta;
   const powerKW = P / 1000;
   
@@ -21,40 +21,45 @@ function calc() {
   document.getElementById('sE').textContent = etaPct;
   document.getElementById('sP').textContent = formatNum(powerKW, 2);
   
-  // Ambil elemen SVG untuk manipulasi visual
   const rotor = document.getElementById('turbine-rotor');
   const flow = document.getElementById('fluid-flow');
-  const drain = document.getElementById('drain-flow');
-  const powerStatText = document.getElementById('sP')?.parentElement; // Box angka output bawah
-  const elementsToColor = [rotor, flow, powerStatText];
-  elementsToColor.forEach(el => {
+  const kwText = document.getElementById('kw');
+  const dataBoxTitle = document.getElementById('sP')?.parentElement?.querySelector('b');
+  const dataBoxNum = document.getElementById('sP');
+  const dataBoxUnit = document.getElementById('sP')?.parentElement?.querySelector('small');
+  const graphicElements = [rotor, flow];
+  graphicElements.forEach(el => {
     if (el) el.classList.remove('status-idle', 'status-low', 'status-high');
   });
+  
+  const textElements = [kwText, dataBoxTitle, dataBoxNum, dataBoxUnit];
+  textElements.forEach(el => {
+    if (el) el.classList.remove('status-idle-txt', 'status-low-txt', 'status-high-txt');
+  });
 
-  // LOGIKA INDIKATOR WARNA DAN KECEPATAN
   if (powerKW === 0) {
-    // 1. Kondisi Mati / Idle (0 kW)
-    rotor.style.animationPlayState = 'paused';
-    flow.style.animationPlayState = 'paused';
-    if(drain) drain.style.animationPlayState = 'paused';
+    // 1. Kondisi Sistem Mati (0 kW) -> Animasi Freeze & Berwarna Merah Neon
+    if(rotor) rotor.style.animationPlayState = 'paused';
+    if(flow) flow.style.animationPlayState = 'paused';
     
-    elementsToColor.forEach(el => el?.classList.add('status-idle'));
+    graphicElements.forEach(el => el?.classList.add('status-idle'));
+    textElements.forEach(el => el?.classList.add('status-idle-txt'));
 
   } else {
-    rotor.style.animationPlayState = 'running';
-    flow.style.animationPlayState = 'running';
-    if(drain) drain.style.animationPlayState = 'running';
-    
+    if(rotor) rotor.style.animationPlayState = 'running';
+    if(flow) flow.style.animationPlayState = 'running';
     let speedFactor = Math.max(0.12, 1.8 - (powerKW / 15)); 
-    rotor.style.animationDuration = speedFactor + 's';
-    flow.style.animationDuration = (speedFactor * 1.2) + 's';
+    if(rotor) rotor.style.animationDuration = speedFactor + 's';
+    if(flow) flow.style.animationDuration = (speedFactor * 1.2) + 's';
     
     if (powerKW > 0 && powerKW <= 5) {
-      // Daya Rendah -> Warna Kuning Amber
-      elementsToColor.forEach(el => el?.classList.add('status-low'));
+      // 2. Daya Rendah (0 s.d 5 kW) -> Putaran Pelan & Berwarna Kuning Amber
+      graphicElements.forEach(el => el?.classList.add('status-low'));
+      textElements.forEach(el => el?.classList.add('status-low-txt'));
     } else {
-      // Daya Tinggi/Optimal (> 5 kW) -> Warna Cyan Terang
-      elementsToColor.forEach(el => el?.classList.add('status-high'));
+      // 3. Daya Tinggi/Optimal (> 5 kW) -> Putaran Cepat & Berwarna Cyan Elektrik
+      graphicElements.forEach(el => el?.classList.add('status-high'));
+      textElements.forEach(el => el?.classList.add('status-high-txt'));
     }
   }
 }
@@ -66,10 +71,8 @@ function resetCalc() {
   calc();
 }
 
-
 ['q', 'h', 'eta'].forEach(id => {
     const element = document.getElementById(id);
     if(element) element.addEventListener('input', calc);
 });
-
 calc();
