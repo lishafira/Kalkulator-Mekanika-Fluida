@@ -1,137 +1,125 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Poppins:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@400;500;600;700&display=swap');
 
 :root {
-  --bg-main: #f8fafc;
-  --border-color: #e2e8f0;
-  --text-dark: #0f172a;
+  --bg-dark: #070a13;
+  --card-dark: #0f1524;
+  --border-neon: rgba(0, 240, 255, 0.2);
+  --border-neon-hover: rgba(0, 240, 255, 0.5);
+  --text-light: #e2e8f0;
   --text-muted: #64748b;
-  --neon-cyan: #38bdf8;
-  --dark-panel: #0f172a;
+  --cyan: #00f0ff;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: 'Poppins', sans-serif;
-  color: var(--text-dark);
-  background-color: var(--bg-main);
+  color: var(--text-light);
+  background-color: var(--bg-dark);
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
   display: flex;
   justify-content: center;
 }
 
-.page {
-  width: min(850px, 94%);
-  padding: 40px 0;
+/* Background Cyberpunk Grid */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
+  background-size: 30px 30px;
 }
 
-.hero { text-align: center; margin-bottom: 35px; }
-.script { font-family: 'Orbitron', sans-serif; color: #0284c7; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 5px; }
-h1 { color: #0f172a; font-size: 36px; font-weight: 800; letter-spacing: -0.5px; }
+.page {
+  width: min(950px, 94%);
+  padding: 50px 0;
+  z-index: 1;
+}
+
+/* Header */
+.hero { text-align: center; margin-bottom: 40px; }
+.script { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 13px; font-weight: 700; letter-spacing: 3px; display: block; margin-bottom: 8px; text-shadow: 0 0 8px rgba(0,240,255,0.4); }
+h1 { font-size: 38px; font-weight: 900; color: #ffffff; letter-spacing: -0.5px; }
 .subtitle { font-size: 14px; margin-top: 8px; color: var(--text-muted); }
 
-.cards-container {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  width: 100%;
-}
+/* Layout Grid Container */
+.cards-container { display: flex; flex-direction: column; gap: 24px; width: 100%; }
+.top-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 
-/* Card Standar (Input & Hasil) - Bersih Elegan */
+/* Struktur Card Dark Modern */
 .card { 
-  background: #ffffff; 
-  border: 1px solid var(--border-color); 
+  background: var(--card-dark); 
+  border: 1px solid var(--border-neon); 
   border-radius: 16px; 
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03); 
-  overflow: hidden; 
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.3s;
 }
+.card:hover { border-color: var(--border-neon-hover); }
 
 .card h2 { 
-  font-size: 15px; 
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px; 
   padding: 16px 20px; 
-  color: var(--text-dark); 
-  border-bottom: 1px solid var(--border-color);
-  text-transform: uppercase;
+  color: #ffffff; 
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--border-neon);
   letter-spacing: 0.5px;
 }
+.content { padding: 22px; }
 
-.content { padding: 20px; }
-
-/* Form Fields */
+/* Desain Form Input */
 .field { margin-bottom: 18px; }
-label { display: block; font-weight: 600; margin-bottom: 6px; color: var(--text-dark); font-size: 13px; }
-.input-row { display: flex; border: 1px solid #cbd5e1; border-radius: 10px; overflow: hidden; background: #fff; }
-input { flex: 1; border: 0; padding: 12px 14px; font-size: 16px; outline: none; color: #0f172a; }
-.unit { min-width: 75px; display: grid; place-items: center; background: #f1f5f9; color: #475569; border-left: 1px solid #cbd5e1; font-weight: 600; font-size: 13px; }
-.hint { font-size: 11px; color: var(--text-muted); margin-top: 5px; }
+label { display: block; font-weight: 500; margin-bottom: 6px; color: var(--text-light); font-size: 13px; }
+.input-row { display: flex; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; background: #090d16; }
+input { flex: 1; border: 0; padding: 12px 14px; font-size: 16px; outline: none; color: #ffffff; background: transparent; font-family: 'Orbitron', sans-serif; }
+.unit { min-width: 75px; display: grid; place-items: center; background: rgba(0,240,255,0.05); color: var(--cyan); border-left: 1px solid rgba(255,255,255,0.1); font-weight: 600; font-size: 13px; }
 
+/* Tombol */
 .btn { 
-  width: 100%; border: 0; border-radius: 10px; padding: 14px; font-weight: 700; font-size: 14px; cursor: pointer; 
-  color: white; background: #0f172a; transition: 0.2s; 
+  width: 100%; border: 1px solid var(--cyan); border-radius: 10px; padding: 14px; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 13px; cursor: pointer; 
+  color: var(--cyan); background: transparent; transition: 0.2s; 
 }
-.btn:hover { background: #1e293b; }
+.btn:hover { background: rgba(0, 240, 255, 0.1); box-shadow: 0 0 15px rgba(0,240,255,0.2); }
 
-/* Result Box */
-.result-box { 
-  text-align: center; padding: 25px 20px; border-radius: 12px; 
-  background: #f8fafc; border: 1px solid var(--border-color); 
-}
+/* Box Hasil */
+.results-content { display: flex; flex-direction: column; justify-content: space-between; height: calc(100% - 50px); }
+.result-box { text-align: center; padding: 25px 20px; border-radius: 12px; background: #090d16; border: 1px solid rgba(255,255,255,0.03); }
 .result-title { color: var(--text-muted); font-weight: 700; font-size: 11px; letter-spacing: 1px; }
-.kw { font-size: 40px; color: #0f172a; font-weight: 800; margin: 4px 0; font-family: 'Orbitron', sans-serif; }
-.watt { display: inline-block; font-size: 13px; color: #0284c7; font-weight: 600; }
+.kw { font-size: 38px; color: var(--cyan); font-weight: 900; margin: 4px 0; font-family: 'Orbitron', sans-serif; text-shadow: 0 0 10px rgba(0,240,255,0.3); }
+.watt { font-size: 13px; color: var(--text-light); font-weight: 500; font-family: 'Orbitron', sans-serif; opacity: 0.8; }
 
 .formula { margin-top: 15px; }
-.formula h3 { color: var(--text-muted); font-size: 12px; margin-bottom: 6px; }
-.math { font-family: 'Orbitron', sans-serif; text-align: center; font-size: 18px; padding: 12px; border: 1px solid var(--border-color); border-radius: 10px; background: #ffffff; color: #0f172a; }
+.formula h3 { color: var(--text-muted); font-size: 11px; margin-bottom: 6px; text-transform: uppercase; }
+.math { font-family: 'Orbitron', sans-serif; text-align: center; font-size: 16px; padding: 12px; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; background: #090d16; color: #ffffff; }
 
-/* ==========================================================================
-   STYLING KHUSUS VISUALISASI TURBIN (DARK MODE CYBERPUNK)
-   ========================================================================== */
-.card.viz-card-dark {
-  background: #0b0f19;
-  border: 1px solid #1e293b;
-}
+/* SVG Visualisasi Turbin */
+svg { width: 100%; height: auto; display: block; border-radius: 12px; background: #090d16; border: 1px solid rgba(255,255,255,0.03); }
+.pipe-dark { fill: none; stroke: #161f33; stroke-width: 22; stroke-linecap: round; stroke-linejoin: round; }
+.flow-cyan { fill: none; stroke: var(--cyan); stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 25 18; animation: flowMove 1s linear infinite; filter: drop-shadow(0 0 4px var(--cyan)); }
+.flow-cyan-slow { fill: none; stroke: #0077b6; stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 40 30; animation: flowMove 2.5s linear infinite; opacity: 0.5; }
 
-.card.viz-card-dark h2 {
-  color: var(--neon-cyan);
-  border-bottom: 1px solid #1e293b;
-  font-family: 'Orbitron', sans-serif;
-}
+@keyframes flowMove { to { stroke-dashoffset: -86; } }
+.turbine-rotor { transform-origin: 480px 260px; animation: spinT 1s linear infinite; }
+@keyframes spinT { to { transform: rotate(360deg); } }
 
-.viz-wrap { padding: 20px; }
-
-svg { 
-  width: 100%; 
-  height: auto; 
-  display: block; 
-  border-radius: 12px; 
-  border: 1px solid #1e293b; 
-}
-
-/* Elemen Perpipaan Turbin */
-.pipe-dark { fill: none; stroke: #1e293b; stroke-width: 22; stroke-linecap: round; stroke-linejoin: round; }
-.flow-cyan { fill: none; stroke: var(--neon-cyan); stroke-width: 14; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 25 20; animation: flowData 1s linear infinite; filter: drop-shadow(0 0 4px var(--neon-cyan)); }
-.flow-cyan-slow { fill: none; stroke: #0284c7; stroke-width: 14; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 40 30; animation: flowData 2.5s linear infinite; opacity: 0.6; }
-
-@keyframes flowData { to { stroke-dashoffset: -90; } }
-
-/* Animasi Rotasi Sumbu Turbin */
-.turbine-rotor { transform-origin: 480px 260px; animation: spinTurbine 1s linear infinite; }
-@keyframes spinTurbine { to { transform: rotate(360deg); } }
-
-/* Grid Dashboard Data Bawah (Dark) */
-.stats-dark { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
-.stat-box { padding: 12px; text-align: center; border: 1px solid #1e293b; border-radius: 10px; background: #0f172a; font-family: 'Orbitron', sans-serif; }
-.stat-box b { display: block; color: #64748b; font-size: 10px; margin-bottom: 4px; font-family: 'Poppins', sans-serif; }
+/* Grid Status Informasi Bawah */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+.stat-box { padding: 14px; text-align: center; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; background: #090d16; font-family: 'Orbitron', sans-serif; }
+.stat-box b { display: block; color: var(--text-muted); font-size: 10px; margin-bottom: 4px; font-family: 'Poppins', sans-serif; font-weight: 400; }
 .stat-box span { font-size: 16px; font-weight: 700; color: #ffffff; }
 
-.glow-txt { color: var(--neon-cyan) !important; filter: drop-shadow(0 0 5px rgba(56,189,248,0.4)); }
+.cyan-txt { color: var(--cyan) !important; text-shadow: 0 0 5px rgba(0,240,255,0.3); }
+.note { margin-top: 15px; padding: 14px; border-radius: 10px; background: #090d16; border-left: 3px solid var(--cyan); color: #94a3b8; font-size: 12px; line-height: 1.6; }
 
-.note-dark { margin-top: 15px; padding: 12px 15px; border-radius: 10px; background: #0f172a; border-left: 3px solid var(--neon-cyan); color: #94a3b8; font-size: 12px; line-height: 1.5; }
-
-/* Responsive Layout HP */
+/* Responsive HP */
 @media (max-width: 768px) {
-  .stats-dark { grid-template-columns: repeat(2, 1fr); }
-  h1 { font-size: 26px; }
-  .kw { font-size: 30px; }
+  .top-grid { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  h1 { font-size: 28px; }
+  .kw { font-size: 32px; }
 }

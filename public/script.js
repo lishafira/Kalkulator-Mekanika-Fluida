@@ -10,10 +10,11 @@ function calc() {
   const etaPct = parseFloat(document.getElementById('eta').value) || 0;
   const eta = etaPct / 100;
   
-  // P = rho * g * Q * H * eta
+  // Perhitungan Energi Daya Turbin Mekanika Fluida
   const P = rho * g * Q * H * eta;
   const powerKW = P / 1000;
   
+  // Render output angka real-time ke web
   document.getElementById('kw').textContent = formatNum(powerKW, 2) + ' kW';
   document.getElementById('watt').textContent = '≈ ' + Math.round(P).toLocaleString('id-ID') + ' Watt';
   document.getElementById('sQ').textContent = Q;
@@ -21,6 +22,7 @@ function calc() {
   document.getElementById('sE').textContent = etaPct;
   document.getElementById('sP').textContent = formatNum(powerKW, 2);
   
+  // Sinkronisasi komponen animasi SVG turbin
   const rotor = document.getElementById('turbine-rotor');
   const flow = document.getElementById('fluid-flow');
   const drain = document.getElementById('drain-flow');
@@ -28,21 +30,18 @@ function calc() {
   if (P > 0) {
     let speedFactor = Math.max(0.12, 1.8 - (powerKW / 15)); 
     rotor.style.animationPlayState = 'running';
-    flow.style.style.animationPlayState = 'running';
+    flow.style.animationPlayState = 'running';
     if(drain) drain.style.animationPlayState = 'running';
     
-    // Semakin tinggi daya, putaran rotor semakin cepat
     rotor.style.animationDuration = speedFactor + 's';
     flow.style.animationDuration = (speedFactor * 1.2) + 's';
   } else {
-    // Jika tidak ada aliran daya (0), hentikan animasi (Idle State)
     rotor.style.animationPlayState = 'paused';
     flow.style.animationPlayState = 'paused';
     if(drain) drain.style.animationPlayState = 'paused';
   }
 }
 
-// Logika Tombol Reset
 function resetCalc() {
   document.getElementById('q').value = 0.02;
   document.getElementById('h').value = 25;
