@@ -38,7 +38,6 @@ function calc() {
   });
 
   if (powerKW === 0) {
-    // 1. Kondisi Sistem Mati (0 kW) -> Animasi Freeze & Berwarna Merah Neon
     if(rotor) rotor.style.animationPlayState = 'paused';
     if(flow) flow.style.animationPlayState = 'paused';
     

@@ -26,8 +26,6 @@ app.post('/calculate', (req, res) => {
     const Q = parseFloat(debit);
     const H = parseFloat(head);
     const eta = parseFloat(efisiensi) / 100; 
-
-    //P = η * ρ * g * Q * H (Hasil dalam Watt)
     const powerInWatts = eta * rho * g * Q * H;
 
     res.json({ power: powerInWatts });
