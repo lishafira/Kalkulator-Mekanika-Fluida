@@ -23,7 +23,6 @@ body {
   justify-content: center;
 }
 
-/* Background Cyberpunk Grid */
 .grid-bg {
   position: fixed;
   inset: 0;
@@ -40,17 +39,14 @@ body {
   z-index: 1;
 }
 
-/* Header */
 .hero { text-align: center; margin-bottom: 40px; }
 .script { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 13px; font-weight: 700; letter-spacing: 3px; display: block; margin-bottom: 8px; text-shadow: 0 0 8px rgba(0,240,255,0.4); }
 h1 { font-size: 38px; font-weight: 900; color: #ffffff; letter-spacing: -0.5px; }
 .subtitle { font-size: 14px; margin-top: 8px; color: var(--text-muted); }
 
-/* Layout Grid Container */
 .cards-container { display: flex; flex-direction: column; gap: 24px; width: 100%; }
 .top-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 
-/* Struktur Card Dark Modern */
 .card { 
   background: var(--card-dark); 
   border: 1px solid var(--border-neon); 
@@ -72,21 +68,19 @@ h1 { font-size: 38px; font-weight: 900; color: #ffffff; letter-spacing: -0.5px; 
 }
 .content { padding: 22px; }
 
-/* Desain Form Input */
+
 .field { margin-bottom: 18px; }
 label { display: block; font-weight: 500; margin-bottom: 6px; color: var(--text-light); font-size: 13px; }
 .input-row { display: flex; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; background: #090d16; }
 input { flex: 1; border: 0; padding: 12px 14px; font-size: 16px; outline: none; color: #ffffff; background: transparent; font-family: 'Orbitron', sans-serif; }
 .unit { min-width: 75px; display: grid; place-items: center; background: rgba(0,240,255,0.05); color: var(--cyan); border-left: 1px solid rgba(255,255,255,0.1); font-weight: 600; font-size: 13px; }
 
-/* Tombol */
 .btn { 
   width: 100%; border: 1px solid var(--cyan); border-radius: 10px; padding: 14px; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 13px; cursor: pointer; 
   color: var(--cyan); background: transparent; transition: 0.2s; 
 }
 .btn:hover { background: rgba(0, 240, 255, 0.1); box-shadow: 0 0 15px rgba(0,240,255,0.2); }
 
-/* Box Hasil */
 .results-content { display: flex; flex-direction: column; justify-content: space-between; height: calc(100% - 50px); }
 .result-box { text-align: center; padding: 25px 20px; border-radius: 12px; background: #090d16; border: 1px solid rgba(255,255,255,0.03); }
 .result-title { color: var(--text-muted); font-weight: 700; font-size: 11px; letter-spacing: 1px; }
@@ -97,7 +91,6 @@ input { flex: 1; border: 0; padding: 12px 14px; font-size: 16px; outline: none; 
 .formula h3 { color: var(--text-muted); font-size: 11px; margin-bottom: 6px; text-transform: uppercase; }
 .math { font-family: 'Orbitron', sans-serif; text-align: center; font-size: 16px; padding: 12px; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; background: #090d16; color: #ffffff; }
 
-/* SVG Visualisasi Turbin */
 svg { width: 100%; height: auto; display: block; border-radius: 12px; background: #090d16; border: 1px solid rgba(255,255,255,0.03); }
 .pipe-dark { fill: none; stroke: #161f33; stroke-width: 22; stroke-linecap: round; stroke-linejoin: round; }
 .flow-cyan { fill: none; stroke: var(--cyan); stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 25 18; animation: flowMove 1s linear infinite; filter: drop-shadow(0 0 4px var(--cyan)); }
@@ -107,7 +100,6 @@ svg { width: 100%; height: auto; display: block; border-radius: 12px; background
 .turbine-rotor { transform-origin: 480px 260px; animation: spinT 1s linear infinite; }
 @keyframes spinT { to { transform: rotate(360deg); } }
 
-/* Grid Status Informasi Bawah */
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
 .stat-box { padding: 14px; text-align: center; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; background: #090d16; font-family: 'Orbitron', sans-serif; }
 .stat-box b { display: block; color: var(--text-muted); font-size: 10px; margin-bottom: 4px; font-family: 'Poppins', sans-serif; font-weight: 400; }
@@ -116,7 +108,6 @@ svg { width: 100%; height: auto; display: block; border-radius: 12px; background
 .cyan-txt { color: var(--cyan) !important; text-shadow: 0 0 5px rgba(0,240,255,0.3); }
 .note { margin-top: 15px; padding: 14px; border-radius: 10px; background: #090d16; border-left: 3px solid var(--cyan); color: #94a3b8; font-size: 12px; line-height: 1.6; }
 
-/* Responsive HP */
 @media (max-width: 768px) {
   .top-grid { grid-template-columns: 1fr; }
   .stats { grid-template-columns: repeat(2, 1fr); }

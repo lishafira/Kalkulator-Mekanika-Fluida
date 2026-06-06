@@ -9,12 +9,9 @@ function calc() {
   const H = parseFloat(document.getElementById('h').value) || 0;
   const etaPct = parseFloat(document.getElementById('eta').value) || 0;
   const eta = etaPct / 100;
-  
-  // Perhitungan Energi Daya Turbin Mekanika Fluida
   const P = rho * g * Q * H * eta;
   const powerKW = P / 1000;
   
-  // Render output angka real-time ke web
   document.getElementById('kw').textContent = formatNum(powerKW, 2) + ' kW';
   document.getElementById('watt').textContent = '≈ ' + Math.round(P).toLocaleString('id-ID') + ' Watt';
   document.getElementById('sQ').textContent = Q;
@@ -22,7 +19,6 @@ function calc() {
   document.getElementById('sE').textContent = etaPct;
   document.getElementById('sP').textContent = formatNum(powerKW, 2);
   
-  // Sinkronisasi komponen animasi SVG turbin
   const rotor = document.getElementById('turbine-rotor');
   const flow = document.getElementById('fluid-flow');
   const drain = document.getElementById('drain-flow');
