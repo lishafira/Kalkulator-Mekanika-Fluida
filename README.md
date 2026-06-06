@@ -5,10 +5,10 @@
 - Command diatas baru bisa untuk windows, untuk linux/macOS akan diupdate secara berkala :>
 - INDIKATOR WARNA PADA TURBIN:
 
-   🔴 **Mati / Idle (0 kW):** Aliran fluida dan rotor turbin berhenti bergerak dengan pendaran warna **Merah**.
+   🔴 **Mati / Idle (0 kW):** Aliran fluida dan rotor turbin berhenti bergerak dengan indikator warna **Merah**.
 
-   🟡 **Daya Rendah (>0 s.d. 5 kW):** Aliran fluida dan rotor berputar lambat dengan pendaran warna **Kuning Amber**.
+   🟡 **Daya Rendah (>0 s.d. 5 kW):** Aliran fluida dan rotor berputar lambat dengan indikator warna **Kuning Amber**.
 
-   🔵 **Daya Optimal (>5 kW):** Aliran fluida dan rotor berputar cepat dengan pendaran warna **Cyan Elektrik**.
+   🔵 **Daya Optimal (>5 kW):** Aliran fluida dan rotor berputar cepat dengan indikator warna **Cyan**.
 
 - Cara diatas cara run di local host yeah
