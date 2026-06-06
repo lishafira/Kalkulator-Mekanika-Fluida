@@ -6,6 +6,13 @@
     box-sizing: border-box; 
     font-family: 'Orbitron', sans-serif !important; 
 }
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Orbitron', sans-serif !important; 
+}
 
 body { 
     background-color: #0b0f19; 
@@ -13,28 +20,306 @@ body {
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    padding: 40px 10px;
+    padding: 40px 20px;
 }
-
-/* Pembungkus Vertikal Utama */
 .main-wrapper {
     display: flex;
     flex-direction: column;
     gap: 30px;
     align-items: center;
+    width: 100%;
+    max-width: 800px; /* Batas lebar maksimal biar rapi di desktop dan HP */
 }
 
 .dashboard-fixed { 
-    width: 800px; 
-    height: 420px; 
+    width: 100%; 
     background-color: #131a2c; 
     border: 1px solid #38bdf8; 
     border-radius: 15px; 
     display: flex; 
     padding: 30px; 
     box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+    gap: 20px;
 }
 
+.panel-left { 
+    width: 60%; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
+}
+
+.panel-left h2 { font-size: 1.4rem; color: #38bdf8; font-weight: bold; }
+.panel-left p { font-size: 0.8rem; color: #38bdf8; margin-bottom: 5px; }
+
+.field label { font-size: 0.75rem; color: #38bdf8; letter-spacing: 1px; font-weight: bold; }
+
+.input-row { 
+    display: flex; 
+    align-items: center; 
+    background: #0f172a; 
+    border: 1px solid #38bdf8; 
+    padding: 10px 14px; 
+    border-radius: 5px; 
+    margin-top: 5px; 
+}
+
+.input-row input { 
+    background: none; 
+    border: none; 
+    color: #ffffff; 
+    width: 100%; 
+    outline: none; 
+    font-size: 1rem; 
+}
+
+/* Sembunyikan spinner default browser */
+.input-row input::-webkit-outer-spin-button,
+.input-row input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.spinner-btns {
+    display: flex;
+    flex-direction: column;
+    margin-right: 12px;
+}
+
+.spinner-btns button {
+    background: none;
+    border: none;
+    color: #38bdf8;
+    font-size: 11px;
+    cursor: pointer;
+    padding: 1px;
+}
+.spinner-btns button:hover { color: #ffffff; }
+.unit { color: #38bdf8; font-size: 0.85rem; font-weight: bold; }
+
+.btn-hit { 
+    width: 100%; 
+    padding: 14px; 
+    background: transparent; 
+    border: 1px solid #38bdf8; 
+    color: #38bdf8;
+    cursor: pointer; 
+    font-weight: bold; 
+    margin-top: 10px; 
+    transition: 0.3s;
+    border-radius: 5px;
+}
+.btn-hit:hover { background: rgba(56, 189, 248, 0.1); color: #fff; box-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
+
+.output {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #38bdf8;
+    font-weight: bold;
+}
+.output span { color: #ffffff; }
+
+.panel-right { 
+    width: 40%; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 15px;
+}
+
+#turbine-svg { 
+    width: 160px; 
+    height: 160px; 
+    stroke: #38bdf8;
+    filter: drop-shadow(0 0 10px #38bdf8); 
+}
+
+#turbine-status { font-size: 0.8rem; color: #38bdf8; font-weight: bold; }
+
+/* Animasi Putar Turbin */
+.spinning { 
+    animation: spin 2s linear infinite; 
+    transform-origin: center; 
+    transform-box: fill-box;
+}
+@keyframes spin { 
+    from { transform: rotate(0deg); } 
+    to { transform: rotate(360deg); } 
+}
+
+
+/* ==========================================================================
+   2. STYLING PANEL BAWAH (DARK-NEON POMPA) - SUDAH DISERASIKAN
+   ========================================================================== */
+.pump-visualization-card {
+    width: 100%;
+    background-color: #131a2c; 
+    border: 1px solid #38bdf8;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+}
+
+.pump-visualization-card h3 {
+    color: #38bdf8;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Diagram Aliran */
+.pump-diagram {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0f172a;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    margin-bottom: 20px;
+}
+
+.tank {
+    background: rgba(56, 189, 248, 0.15);
+    color: #ffffff;
+    border: 1px solid #38bdf8;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.pipe {
+    flex: 1;
+    height: 16px;
+    background: #1e293b;
+    margin: 0 10px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+.flow-animation {
+    width: 35px;
+    height: 100%;
+    background: #00ff7f; /* Aliran diganti warna hijau neon agar kontras dan futuristik */
+    position: absolute;
+    left: -35px;
+    border-radius: 4px;
+    box-shadow: 0 0 8px #00ff7f;
+}
+
+/* Class pemicu gerak aliran pipa */
+.flowing {
+    animation: pipeFlow 1.5s linear infinite;
+}
+@keyframes pipeFlow {
+    0% { left: -35px; }
+    100% { left: 100%; }
+}
+
+/* Roda Gigi Pompa */
+.pump-icon {
+    font-size: 36px;
+    display: inline-block;
+    filter: drop-shadow(0 0 5px #38bdf8);
+}
+
+/* Class pemicu gerak rotasi mesin pompa */
+.pump-spinning {
+    animation: spin 1.5s linear infinite;
+}
+
+/* Grid Box Data Angka */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-box {
+    background: #0f172a;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    color: #38bdf8;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.stat-value {
+    font-size: 0.95rem;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.note {
+    font-size: 0.75rem;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.05);
+    border: 1px dashed rgba(56, 189, 248, 0.3);
+    padding: 12px;
+    border-radius: 6px;
+    line-height: 1.5;
+}
+
+
+/* ==========================================================================
+   3. RESPONSIVITAS SEAMLESS DI HP (KONDISI RESPONSIVE VERTIKAL)
+   ========================================================================== */
+@media (max-width: 768px) {
+    body { padding: 20px 10px; }
+
+    .dashboard-fixed {
+        flex-direction: column;
+        padding: 20px;
+        gap: 25px;
+    }
+
+    .panel-left { width: 100%; }
+    .panel-right { width: 100%; order: -1; } /* Turbin naik paling atas di HP */
+    #turbine-svg { width: 140px; height: 140px; }
+
+    .pump-diagram {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .pipe {
+        width: 16px;
+        height: 50px;
+        margin: 5px 0;
+    }
+
+    .flow-animation {
+        width: 100%;
+        height: 20px;
+        top: -20px;
+        left: 0;
+    }
+
+    /* Aliran berubah ke arah bawah khusus di HP */
+    .flowing {
+        animation: pipeFlowVertical 1.5s linear infinite;
+    }
+    @keyframes pipeFlowVertical {
+        0% { top: -20px; }
+        100% { top: 100%; }
+    }
+
+    .stats-row {
+        grid-template-columns: repeat(2, 1fr); /* Tampilan grid angka jadi 2x2 di HP */
+    }
+}
 .panel-left { 
     width: 380px; 
     display: flex; 
