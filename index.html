@@ -1,109 +1,129 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fluid Control Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aplikasi Perhitungan Daya Turbin</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <div class="main-wrapper">
+    <main class="page">
+        <section class="main">
+            <header class="hero">
+                <span class="script">Mekanika Fluida</span>
+                <h1>ESTIMASI DAYA TURBIN</h1>
+                <div class="subtitle">Sistem Kontrol Estimasi dan Analisis</div>
+            </header>
 
-        <div class="dashboard-fixed">
-            <div class="panel-left">
-                <header>
-                    <h2>PERHITUNGAN DAYA TURBIN</h2>
-                    <p>Sistem Estimasi Daya</p>
-                </header>
+            <div class="cards-container">
                 
-                <div class="field">
-                    <label>DEBIT ALIRAN (Q)</label>
-                    <div class="input-row">
-                        <input type="number" id="debit" value="0.00" step="0.01">
-                        <div class="spinner-btns">
-                            <button onclick="adjust('debit', 0.01)">▲</button>
-                            <button onclick="adjust('debit', -0.01)">▼</button>
+                <section class="card">
+                    <h2>Input Parameter Aliran Turbin</h2>
+                    <div class="content">
+                        <div class="field">
+                            <label for="q">Debit Aliran (Q)</label>
+                            <div class="input-row">
+                                <input type="number" id="q" value="0.02" step="0.001" min="0" />
+                                <div class="unit">m³/s</div>
+                            </div>
+                            <div class="hint">Volume air yang menghantam sudu turbin per detik</div>
                         </div>
-                        <span class="unit">m³/s</span>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label>HEAD TEKANAN (H)</label>
-                    <div class="input-row">
-                        <input type="number" id="head" value="0.00" step="0.1">
-                        <div class="spinner-btns">
-                            <button onclick="adjust('head', 0.1)">▲</button>
-                            <button onclick="adjust('head', -0.1)">▼</button>
+                        
+                        <div class="field">
+                            <label for="h">Head Efektif (H)</label>
+                            <div class="input-row">
+                                <input type="number" id="h" value="25" step="0.5" min="0" />
+                                <div class="unit">meter</div>
+                            </div>
+                            <div class="hint">Tinggi jatuh air efektif menuju *nozzle* turbin</div>
                         </div>
-                        <span class="unit">m</span>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label>EFISIENSI (η)</label>
-                    <div class="input-row">
-                        <input type="number" id="efisiensi" value="0" step="1">
-                        <div class="spinner-btns">
-                            <button onclick="adjust('efisiensi', 1)">▲</button>
-                            <button onclick="adjust('efisiensi', -1)">▼</button>
+                        
+                        <div class="field">
+                            <label for="eta">Efisiensi Turbin (η)</label>
+                            <div class="input-row">
+                                <input type="number" id="eta" value="75" step="1" min="1" max="100" />
+                                <div class="unit">%</div>
+                            </div>
+                            <div class="hint">Efisiensi konversi energi kinetik fluida menjadi mekanis</div>
                         </div>
-                        <span class="unit">%</span>
+                        
+                        <div class="btn-container">
+                            <button class="btn reset" onclick="resetCalc()">Reset Parameter</button>
+                        </div>
                     </div>
-                </div>
+                </section>
 
-                <button class="btn-hit" onclick="calculate()">HITUNG DAYA LISTRIK</button>
-                <div class="output">OUTPUT ENERGI (kW): <span id="result">0.00 kW</span></div>
+                <section class="card">
+                    <h2>📊 Output Generasi Daya Listrik</h2>
+                    <div class="content">
+                        <div class="result-box">
+                            <div class="result-title">ESTIMASI DAYA GENERATOR</div>
+                            <div class="kw" id="kw">0,00 kW</div>
+                            <div class="watt" id="watt">≈ 0 Watt</div>
+                        </div>
+                        
+                        <div class="formula">
+                            <h3>Persamaan Konversi Energi:</h3>
+                            <div class="math">P = ρ × g × Q × H × η</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card viz-card-dark">
+                    <h2>⚡ Live Preview: Sistem Turbin & Aliran Fluida</h2>
+                    <div class="viz-wrap">
+                        <svg viewBox="0 0 920 420">
+                            <defs>
+                                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="1"/>
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="#0f172a"/>
+                            <rect width="100%" height="100%" fill="url(#grid)" />
+                            
+                            <path class="pipe-dark" d="M 50,80 L 350,80 L 350,260 L 410,260" />
+                            <path class="flow-cyan" id="fluid-flow" d="M 50,80 L 350,80 L 350,260 L 410,260" />
+                            
+                            <path d="M 390,250 L 420,255 L 420,265 L 390,270 Z" fill="#38bdf8" />
+                            
+                            <circle cx="480" cy="260" r="75" fill="#131a2c" stroke="#38bdf8" stroke-width="3" />
+                            <circle cx="480" cy="260" r="60" fill="none" stroke="#1e293b" stroke-dasharray="6 6" />
+                            
+                            <g class="turbine-rotor" id="turbine-rotor">
+                                <circle cx="480" cy="260" r="16" fill="#38bdf8" />
+                                <path d="M 480,190 L 480,330 M 410,260 L 550,260" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+                                <circle cx="480" cy="190" r="10" fill="none" stroke="#38bdf8" stroke-width="3"/>
+                                <circle cx="480" cy="330" r="10" fill="none" stroke="#38bdf8" stroke-width="3"/>
+                                <circle cx="410" cy="260" r="10" fill="none" stroke="#38bdf8" stroke-width="3"/>
+                                <circle cx="550" cy="260" r="10" fill="none" stroke="#38bdf8" stroke-width="3"/>
+                            </g>
+                            
+                            <path class="pipe-dark" d="M 480,335 L 480,390 L 850,390" />
+                            <path class="flow-cyan-slow" id="drain-flow" d="M 480,335 L 480,390 L 850,390" />
+                            
+                            <text x="130" y="55" fill="#38bdf8" font-size="12" font-weight="bold" letter-spacing="1">PENSTOCK (ALIRAN MASUK)</text>
+                            <text x="700" y="365" fill="#64748b" font-size="12" font-weight="bold" letter-spacing="1">TAILRACE (OUTLET)</text>
+                            <rect x="440" y="125" width="80" height="25" rx="5" fill="#0f172a" stroke="#38bdf8" stroke-width="1" />
+                            <text x="480" y="142" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle" letter-spacing="1">ROTOR</text>
+                        </svg>
+                        
+                        <div class="stats-dark">
+                            <div class="stat-box"><b>Debit (Q)</b><span id="sQ">0.02</span> <small>m³/s</small></div>
+                            <div class="stat-box"><b>Head (H)</b><span id="sH">25</span> <small>m</small></div>
+                            <div class="stat-box"><b>Efisiensi (η)</b><span id="sE">75</span> <small>%</small></div>
+                            <div class="stat-box"><b class="glow-txt">Daya Output</b><span id="sP" class="glow-txt">0.00</span> <small class="glow-txt">kW</small></div>
+                        </div>
+                        
+                        <div class="note-dark">
+                            <b></b> Animasi kecepatan pulsa aliran fluida hulu (*penstock*) dan rotasi rotor mekanis mensimulasikan respon fisis sistem turbin secara *real-time* sebanding dengan energi kinetik yang masuk.
+                        </div>
+                    </div>
+                </section>
+
             </div>
-
-            <div class="panel-right">
-                <svg id="turbine-svg" viewBox="0 0 200 200">
-                    <circle cx="100" cy="100" r="40" stroke="#38bdf8" stroke-width="2" fill="none"/>
-                    <path d="M100 30 L100 170 M30 100 L170 100" stroke="#38bdf8" stroke-width="3"/>
-                </svg>
-                <p id="turbine-status">TURBINE STATUS: IDLE</p>
-            </div>
-        </div>
-
-        <div class="pump-visualization-card">
-            <h3>VISUALISASI SISTEM POMPA</h3>
-            
-            <div class="pump-diagram">
-                <div class="tank">Sumber Air</div>
-                <div class="pipe">
-                    <div class="flow-animation" id="flow1"></div>
-                </div>
-                <div class="pump-icon" id="main-pump">⚙️</div>
-                <div class="pipe">
-                    <div class="flow-animation" id="flow2"></div>
-                </div>
-                <div class="tank">Tujuan</div>
-            </div>
-
-            <div class="stats-row">
-                <div class="stat-box">
-                    <div class="stat-label">Debit (Q)</div>
-                    <div class="stat-value"><span id="stat-q">0.00</span> m³/s</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">Head (H)</div>
-                    <div class="stat-value"><span id="stat-h">0.00</span> m</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">Efisiensi (η)</div>
-                    <div class="stat-value"><span id="stat-eff">0</span> %</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">Daya (P)</div>
-                    <div class="stat-value"><span id="stat-p">0.00</span> kW</div>
-                </div>
-            </div>
-
-            <p class="note">Semakin besar debit dan head turbin, semakin besar daya listrik yang dibutuhkan. Semakin tinggi efisiensi, daya listrik yang diperlukan semakin kecil.</p>
-        </div>
-
-    </div>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>

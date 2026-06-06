@@ -1,71 +1,58 @@
-function adjust(id, delta) {
-    const input = document.getElementById(id);
-    let val = parseFloat(input.value) || 0;
-    val = (val + delta).toFixed(id === 'efisiensi' ? 0 : 2);
-    if (val < 0) val = id === 'efisiensi' ? "0" : "0.00";
-    
-    input.value = val;
+const rho = 1000, g = 9.81;
+
+function formatNum(n, d = 2) {
+  return Number(n).toLocaleString('id-ID', {minimumFractionDigits: d, maximumFractionDigits: d});
 }
 
-function calculate() {
-    const Q = parseFloat(document.getElementById('debit').value) || 0;
-    const H = parseFloat(document.getElementById('head').value) || 0;
-    const eta = (parseFloat(document.getElementById('efisiensi').value) || 0) / 100;
+function calc() {
+  const Q = parseFloat(document.getElementById('q').value) || 0;
+  const H = parseFloat(document.getElementById('h').value) || 0;
+  const etaPct = parseFloat(document.getElementById('eta').value) || 0;
+  const eta = etaPct / 100;
+  
+  // P = rho * g * Q * H * eta
+  const P = rho * g * Q * H * eta;
+  const powerKW = P / 1000;
+  
+  document.getElementById('kw').textContent = formatNum(powerKW, 2) + ' kW';
+  document.getElementById('watt').textContent = '≈ ' + Math.round(P).toLocaleString('id-ID') + ' Watt';
+  document.getElementById('sQ').textContent = Q;
+  document.getElementById('sH').textContent = H;
+  document.getElementById('sE').textContent = etaPct;
+  document.getElementById('sP').textContent = formatNum(powerKW, 2);
+  
+  const rotor = document.getElementById('turbine-rotor');
+  const flow = document.getElementById('fluid-flow');
+  const drain = document.getElementById('drain-flow');
+  
+  if (P > 0) {
+    let speedFactor = Math.max(0.12, 1.8 - (powerKW / 15)); 
+    rotor.style.animationPlayState = 'running';
+    flow.style.style.animationPlayState = 'running';
+    if(drain) drain.style.animationPlayState = 'running';
     
-    //P = (rho * g * Q * H * eta) / 1000
-    const P = (1000 * 9.81 * Q * H * eta) / 1000;
-    document.getElementById('result').innerText = P.toFixed(2) + " kW";
-    document.getElementById('stat-q').innerText = Q.toFixed(2);
-    document.getElementById('stat-h').innerText = H.toFixed(2);
-    document.getElementById('stat-eff').innerText = (eta * 100).toFixed(0);
-    document.getElementById('stat-p').innerText = P.toFixed(2);
-    
-    const turbineSvg = document.getElementById('turbine-svg');
-    const statusText = document.getElementById('turbine-status');
-    const pumpIcon = document.getElementById('main-pump');
-    const flow1 = document.getElementById('flow1');
-    const flow2 = document.getElementById('flow2');
-    
-    turbineSvg.classList.remove('spinning');
-    pumpIcon.classList.remove('pump-spinning');
-    flow1.classList.remove('flowing');
-    flow2.classList.remove('flowing');
-
-    if (P > 0) {
-        //Cyan (<500), Hijau Neon (500-2000), Amber (>2000)
-        let color = "#38bdf8"; 
-        if (P >= 500 && P <= 2000) {
-            color = "#00ff7f"; 
-        } else if (P > 2000) {
-            color = "#ff7f00"; 
-        }
-        
-        // Aplikasikan warna & glow effect ke bagian dalam garis SVG target turbin
-        turbineSvg.querySelectorAll('circle, path').forEach(el => {
-            el.style.stroke = color;
-            el.style.filter = `drop-shadow(0 0 8px ${color})`;
-        });
-        
-        // Memicu trigger reflow browser agar animasi restart mulus
-        void turbineSvg.offsetWidth;
-        
-        // Aktifkan putaran Turbin Atas & Sistem Aliran Pompa Bawah
-        turbineSvg.classList.add('spinning');
-        pumpIcon.classList.add('pump-spinning');
-        flow1.classList.add('flowing');
-        flow2.classList.add('flowing');
-        
-        statusText.innerText = "TURBINE STATUS: ACTIVE";
-        statusText.style.color = color;
-        
-    } else {
-        // JIKA DAYA 0.00 kW -> MATIKAN & SELESAI
-        turbineSvg.querySelectorAll('circle, path').forEach(el => {
-            el.style.stroke = "#38bdf8";
-            el.style.filter = "none";
-        });
-        
-        statusText.innerText = "TURBINE STATUS: IDLE";
-        statusText.style.color = "#38bdf8";
-    }
+    // Semakin tinggi daya, putaran rotor semakin cepat
+    rotor.style.animationDuration = speedFactor + 's';
+    flow.style.animationDuration = (speedFactor * 1.2) + 's';
+  } else {
+    // Jika tidak ada aliran daya (0), hentikan animasi (Idle State)
+    rotor.style.animationPlayState = 'paused';
+    flow.style.animationPlayState = 'paused';
+    if(drain) drain.style.animationPlayState = 'paused';
+  }
 }
+
+// Logika Tombol Reset
+function resetCalc() {
+  document.getElementById('q').value = 0.02;
+  document.getElementById('h').value = 25;
+  document.getElementById('eta').value = 75;
+  calc();
+}
+
+['q', 'h', 'eta'].forEach(id => {
+    const element = document.getElementById(id);
+    if(element) element.addEventListener('input', calc);
+});
+
+calc();

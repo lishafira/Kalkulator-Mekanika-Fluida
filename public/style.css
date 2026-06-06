@@ -1,588 +1,137 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Poppins:wght@400;600;700&display=swap');
 
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-    font-family: 'Orbitron', sans-serif !important; 
-}
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-    font-family: 'Orbitron', sans-serif !important; 
+:root {
+  --bg-main: #f8fafc;
+  --border-color: #e2e8f0;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --neon-cyan: #38bdf8;
+  --dark-panel: #0f172a;
 }
 
-body { 
-    background-color: #0b0f19; 
-    min-height: 100vh; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    padding: 40px 20px;
-}
-.main-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
-    width: 100%;
-    max-width: 800px; /* Batas lebar maksimal biar rapi di desktop dan HP */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-dark);
+  background-color: var(--bg-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
-.dashboard-fixed { 
-    width: 100%; 
-    background-color: #131a2c; 
-    border: 1px solid #38bdf8; 
-    border-radius: 15px; 
-    display: flex; 
-    padding: 30px; 
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
-    gap: 20px;
+.page {
+  width: min(850px, 94%);
+  padding: 40px 0;
 }
 
-.panel-left { 
-    width: 60%; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 15px; 
+.hero { text-align: center; margin-bottom: 35px; }
+.script { font-family: 'Orbitron', sans-serif; color: #0284c7; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 5px; }
+h1 { color: #0f172a; font-size: 36px; font-weight: 800; letter-spacing: -0.5px; }
+.subtitle { font-size: 14px; margin-top: 8px; color: var(--text-muted); }
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
 }
 
-.panel-left h2 { font-size: 1.4rem; color: #38bdf8; font-weight: bold; }
-.panel-left p { font-size: 0.8rem; color: #38bdf8; margin-bottom: 5px; }
-
-.field label { font-size: 0.75rem; color: #38bdf8; letter-spacing: 1px; font-weight: bold; }
-
-.input-row { 
-    display: flex; 
-    align-items: center; 
-    background: #0f172a; 
-    border: 1px solid #38bdf8; 
-    padding: 10px 14px; 
-    border-radius: 5px; 
-    margin-top: 5px; 
+/* Card Standar (Input & Hasil) - Bersih Elegan */
+.card { 
+  background: #ffffff; 
+  border: 1px solid var(--border-color); 
+  border-radius: 16px; 
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03); 
+  overflow: hidden; 
 }
 
-.input-row input { 
-    background: none; 
-    border: none; 
-    color: #ffffff; 
-    width: 100%; 
-    outline: none; 
-    font-size: 1rem; 
+.card h2 { 
+  font-size: 15px; 
+  padding: 16px 20px; 
+  color: var(--text-dark); 
+  border-bottom: 1px solid var(--border-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* Sembunyikan spinner default browser */
-.input-row input::-webkit-outer-spin-button,
-.input-row input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
+.content { padding: 20px; }
 
-.spinner-btns {
-    display: flex;
-    flex-direction: column;
-    margin-right: 12px;
-}
+/* Form Fields */
+.field { margin-bottom: 18px; }
+label { display: block; font-weight: 600; margin-bottom: 6px; color: var(--text-dark); font-size: 13px; }
+.input-row { display: flex; border: 1px solid #cbd5e1; border-radius: 10px; overflow: hidden; background: #fff; }
+input { flex: 1; border: 0; padding: 12px 14px; font-size: 16px; outline: none; color: #0f172a; }
+.unit { min-width: 75px; display: grid; place-items: center; background: #f1f5f9; color: #475569; border-left: 1px solid #cbd5e1; font-weight: 600; font-size: 13px; }
+.hint { font-size: 11px; color: var(--text-muted); margin-top: 5px; }
 
-.spinner-btns button {
-    background: none;
-    border: none;
-    color: #38bdf8;
-    font-size: 11px;
-    cursor: pointer;
-    padding: 1px;
+.btn { 
+  width: 100%; border: 0; border-radius: 10px; padding: 14px; font-weight: 700; font-size: 14px; cursor: pointer; 
+  color: white; background: #0f172a; transition: 0.2s; 
 }
-.spinner-btns button:hover { color: #ffffff; }
-.unit { color: #38bdf8; font-size: 0.85rem; font-weight: bold; }
+.btn:hover { background: #1e293b; }
 
-.btn-hit { 
-    width: 100%; 
-    padding: 14px; 
-    background: transparent; 
-    border: 1px solid #38bdf8; 
-    color: #38bdf8;
-    cursor: pointer; 
-    font-weight: bold; 
-    margin-top: 10px; 
-    transition: 0.3s;
-    border-radius: 5px;
+/* Result Box */
+.result-box { 
+  text-align: center; padding: 25px 20px; border-radius: 12px; 
+  background: #f8fafc; border: 1px solid var(--border-color); 
 }
-.btn-hit:hover { background: rgba(56, 189, 248, 0.1); color: #fff; box-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
+.result-title { color: var(--text-muted); font-weight: 700; font-size: 11px; letter-spacing: 1px; }
+.kw { font-size: 40px; color: #0f172a; font-weight: 800; margin: 4px 0; font-family: 'Orbitron', sans-serif; }
+.watt { display: inline-block; font-size: 13px; color: #0284c7; font-weight: 600; }
 
-.output {
-    margin-top: 10px;
-    font-size: 1rem;
-    color: #38bdf8;
-    font-weight: bold;
-}
-.output span { color: #ffffff; }
-
-.panel-right { 
-    width: 40%; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    gap: 15px;
-}
-
-#turbine-svg { 
-    width: 160px; 
-    height: 160px; 
-    stroke: #38bdf8;
-    filter: drop-shadow(0 0 10px #38bdf8); 
-}
-
-#turbine-status { font-size: 0.8rem; color: #38bdf8; font-weight: bold; }
-
-/* Animasi Putar Turbin */
-.spinning { 
-    animation: spin 2s linear infinite; 
-    transform-origin: center; 
-    transform-box: fill-box;
-}
-@keyframes spin { 
-    from { transform: rotate(0deg); } 
-    to { transform: rotate(360deg); } 
-}
-
+.formula { margin-top: 15px; }
+.formula h3 { color: var(--text-muted); font-size: 12px; margin-bottom: 6px; }
+.math { font-family: 'Orbitron', sans-serif; text-align: center; font-size: 18px; padding: 12px; border: 1px solid var(--border-color); border-radius: 10px; background: #ffffff; color: #0f172a; }
 
 /* ==========================================================================
-   2. STYLING PANEL BAWAH (DARK-NEON POMPA) - SUDAH DISERASIKAN
+   STYLING KHUSUS VISUALISASI TURBIN (DARK MODE CYBERPUNK)
    ========================================================================== */
-.pump-visualization-card {
-    width: 100%;
-    background-color: #131a2c; 
-    border: 1px solid #38bdf8;
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+.card.viz-card-dark {
+  background: #0b0f19;
+  border: 1px solid #1e293b;
 }
 
-.pump-visualization-card h3 {
-    color: #38bdf8;
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-    font-weight: bold;
+.card.viz-card-dark h2 {
+  color: var(--neon-cyan);
+  border-bottom: 1px solid #1e293b;
+  font-family: 'Orbitron', sans-serif;
 }
 
-/* Diagram Aliran */
-.pump-diagram {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #0f172a;
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    margin-bottom: 20px;
+.viz-wrap { padding: 20px; }
+
+svg { 
+  width: 100%; 
+  height: auto; 
+  display: block; 
+  border-radius: 12px; 
+  border: 1px solid #1e293b; 
 }
 
-.tank {
-    background: rgba(56, 189, 248, 0.15);
-    color: #ffffff;
-    border: 1px solid #38bdf8;
-    padding: 10px 15px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: bold;
-}
+/* Elemen Perpipaan Turbin */
+.pipe-dark { fill: none; stroke: #1e293b; stroke-width: 22; stroke-linecap: round; stroke-linejoin: round; }
+.flow-cyan { fill: none; stroke: var(--neon-cyan); stroke-width: 14; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 25 20; animation: flowData 1s linear infinite; filter: drop-shadow(0 0 4px var(--neon-cyan)); }
+.flow-cyan-slow { fill: none; stroke: #0284c7; stroke-width: 14; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 40 30; animation: flowData 2.5s linear infinite; opacity: 0.6; }
 
-.pipe {
-    flex: 1;
-    height: 16px;
-    background: #1e293b;
-    margin: 0 10px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-    border: 1px solid rgba(56, 189, 248, 0.4);
-}
+@keyframes flowData { to { stroke-dashoffset: -90; } }
 
-.flow-animation {
-    width: 35px;
-    height: 100%;
-    background: #00ff7f; /* Aliran diganti warna hijau neon agar kontras dan futuristik */
-    position: absolute;
-    left: -35px;
-    border-radius: 4px;
-    box-shadow: 0 0 8px #00ff7f;
-}
+/* Animasi Rotasi Sumbu Turbin */
+.turbine-rotor { transform-origin: 480px 260px; animation: spinTurbine 1s linear infinite; }
+@keyframes spinTurbine { to { transform: rotate(360deg); } }
 
-/* Class pemicu gerak aliran pipa */
-.flowing {
-    animation: pipeFlow 1.5s linear infinite;
-}
-@keyframes pipeFlow {
-    0% { left: -35px; }
-    100% { left: 100%; }
-}
+/* Grid Dashboard Data Bawah (Dark) */
+.stats-dark { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
+.stat-box { padding: 12px; text-align: center; border: 1px solid #1e293b; border-radius: 10px; background: #0f172a; font-family: 'Orbitron', sans-serif; }
+.stat-box b { display: block; color: #64748b; font-size: 10px; margin-bottom: 4px; font-family: 'Poppins', sans-serif; }
+.stat-box span { font-size: 16px; font-weight: 700; color: #ffffff; }
 
-/* Roda Gigi Pompa */
-.pump-icon {
-    font-size: 36px;
-    display: inline-block;
-    filter: drop-shadow(0 0 5px #38bdf8);
-}
+.glow-txt { color: var(--neon-cyan) !important; filter: drop-shadow(0 0 5px rgba(56,189,248,0.4)); }
 
-/* Class pemicu gerak rotasi mesin pompa */
-.pump-spinning {
-    animation: spin 1.5s linear infinite;
-}
+.note-dark { margin-top: 15px; padding: 12px 15px; border-radius: 10px; background: #0f172a; border-left: 3px solid var(--neon-cyan); color: #94a3b8; font-size: 12px; line-height: 1.5; }
 
-/* Grid Box Data Angka */
-.stats-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.stat-box {
-    background: #0f172a;
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    padding: 12px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.stat-label {
-    font-size: 0.7rem;
-    color: #38bdf8;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-.stat-value {
-    font-size: 0.95rem;
-    color: #ffffff;
-    font-weight: bold;
-}
-
-.note {
-    font-size: 0.75rem;
-    color: #38bdf8;
-    background: rgba(56, 189, 248, 0.05);
-    border: 1px dashed rgba(56, 189, 248, 0.3);
-    padding: 12px;
-    border-radius: 6px;
-    line-height: 1.5;
-}
-
-
-/* ==========================================================================
-   3. RESPONSIVITAS SEAMLESS DI HP (KONDISI RESPONSIVE VERTIKAL)
-   ========================================================================== */
+/* Responsive Layout HP */
 @media (max-width: 768px) {
-    body { padding: 20px 10px; }
-
-    .dashboard-fixed {
-        flex-direction: column;
-        padding: 20px;
-        gap: 25px;
-    }
-
-    .panel-left { width: 100%; }
-    .panel-right { width: 100%; order: -1; } /* Turbin naik paling atas di HP */
-    #turbine-svg { width: 140px; height: 140px; }
-
-    .pump-diagram {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .pipe {
-        width: 16px;
-        height: 50px;
-        margin: 5px 0;
-    }
-
-    .flow-animation {
-        width: 100%;
-        height: 20px;
-        top: -20px;
-        left: 0;
-    }
-
-    /* Aliran berubah ke arah bawah khusus di HP */
-    .flowing {
-        animation: pipeFlowVertical 1.5s linear infinite;
-    }
-    @keyframes pipeFlowVertical {
-        0% { top: -20px; }
-        100% { top: 100%; }
-    }
-
-    .stats-row {
-        grid-template-columns: repeat(2, 1fr); /* Tampilan grid angka jadi 2x2 di HP */
-    }
-}
-.panel-left { 
-    width: 380px; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 12px; 
-}
-
-.panel-left h2 { font-size: 1.4rem; color: #38bdf8; font-weight: bold; }
-.panel-left p { font-size: 0.8rem; color: #38bdf8; margin-bottom: 10px; }
-
-.field label { font-size: 0.7rem; color: #38bdf8; letter-spacing: 1px; font-weight: bold; }
-
-.input-row { 
-    display: flex; 
-    align-items: center; 
-    background: #0f172a; 
-    border: 1px solid #38bdf8; 
-    padding: 8px 12px; 
-    border-radius: 5px; 
-    margin-top: 4px; 
-}
-
-.input-row input { 
-    background: none; 
-    border: none; 
-    color: #ffffff; 
-    width: 100%; 
-    outline: none; 
-    font-size: 1rem; 
-}
-
-.input-row input::-webkit-outer-spin-button,
-.input-row input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.spinner-btns {
-    display: flex;
-    flex-direction: column;
-    margin-right: 10px;
-}
-
-.spinner-btns button {
-    background: none;
-    border: none;
-    color: #38bdf8;
-    font-size: 10px;
-    cursor: pointer;
-    padding: 2px;
-}
-
-.spinner-btns button:hover { color: #ffffff; }
-.unit { color: #38bdf8; font-size: 0.85rem; font-weight: bold; }
-
-.btn-hit { 
-    width: 100%; 
-    padding: 12px; 
-    background: transparent; 
-    border: 1px solid #38bdf8; 
-    color: #38bdf8;
-    cursor: pointer; 
-    font-weight: bold; 
-    margin-top: 8px; 
-    transition: 0.3s;
-}
-.btn-hit:hover { background: rgba(56, 189, 248, 0.1); color: #fff; }
-
-.output {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: #38bdf8;
-    font-weight: bold;
-}
-.output span { color: #ffffff; }
-
-.panel-right { 
-    flex: 1; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    gap: 15px;
-}
-
-#turbine-svg { 
-    width: 200px; 
-    height: 200px; 
-    stroke: #38bdf8;
-    filter: drop-shadow(0 0 10px #38bdf8); 
-}
-
-#turbine-status { font-size: 0.85rem; color: #38bdf8; font-weight: bold; }
-
-.spinning { 
-    animation: spin 2s linear infinite; 
-    transform-origin: center; 
-    transform-box: fill-box;
-}
-@keyframes spin { 
-    from { transform: rotate(0deg); } 
-    to { transform: rotate(360deg); } 
-}
-
-
-.pump-visualization-card {
-    width: 800px;
-    background-color: #4160e6; 
-    border: 1px solid #12355e;
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
-}
-
-.pump-visualization-card h3 {
-    color: #063c63;
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-}
-
-.pump-diagram {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #061d33;
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #4796b7;
-    margin-bottom: 20px;
-}
-
-.tank {
-    background: #061d33;
-    color: #4796b7;
-    padding: 10px 15px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: bold;
-}
-
-.pipe {
-    flex: 1;
-    height: 16px;
-    background: #061d33;
-    margin: 0 10px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-
-.flow-animation {
-    width: 30px;
-    height: 100%;
-    background: #6bc9ff;
-    position: absolute;
-    left: -30px;
-    border-radius: 4px;
-}
-
-.flowing {
-    animation: pipeFlow 1.5s linear infinite;
-}
-@keyframes pipeFlow {
-    0% { left: -30px; }
-    100% { left: 100%; }
-}
-
-.pump-icon {
-    font-size: 36px;
-    display: inline-block;
-}
-
-.pump-spinning {
-    animation: spin 1.5s linear infinite;
-}
-
-.stats-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.stat-box {
-    background: #2589a2;
-    border: 1px solid #2e36a1;
-    padding: 12px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.stat-label {
-    font-size: 0.65rem;
-    color: #8c8c8c;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-}
-
-.stat-value {
-    font-size: 0.95rem;
-    color: #5cc9e8;
-    font-weight: bold;
-}
-
-.note {
-    font-size: 0.75rem;
-    color: #072d4b;
-    background: #3b6292;
-    padding: 12px;
-    border-radius: 6px;
-    line-height: 1.4;
-}
-
-@media (max-width: 768px) {
-    body { padding: 20px 10px; }
-    
-    .main-wrapper { width: 100%; gap: 20px; }
-    .dashboard-fixed {
-        width: 100%;
-        height: auto;
-        flex-direction: column;
-        gap: 25px;
-        padding: 20px;
-    }
-
-    .panel-left { width: 100%; }
-    .panel-right { order: -1; margin-bottom: 10px; } 
-    #turbine-svg { width: 160px; height: 160px; }
-
-    .pump-visualization-card {
-        width: 100%;
-        padding: 15px;
-    }
-
-    .pump-diagram {
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px 5px;
-    }
-
-    .pipe {
-        width: 16px;
-        height: 50px;
-        margin: 5px 0;
-    }
-
-    .flow-animation {
-        width: 100%;
-        height: 20px;
-        top: -20px;
-        left: 0;
-    }
-
-    .flowing {
-        animation: pipeFlowVertical 1.5s linear infinite;
-    }
-    @keyframes pipeFlowVertical {
-        0% { top: -20px; }
-        100% { top: 100%; }
-    }
-
-    .stats-row {
-        grid-template-columns: repeat(2, 1fr); 
-    }
+  .stats-dark { grid-template-columns: repeat(2, 1fr); }
+  h1 { font-size: 26px; }
+  .kw { font-size: 30px; }
 }
