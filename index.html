@@ -3,88 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SISTEM POMPA KONTROL FLUIDA</title>
+    <title>Fluid Control & Pump System</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="dashboard-fixed">
-        <div class="panel-left">
-            <h2>PERHITUNGAN DAYA TURBIN</h2>
-            <p>Sistem Estimasi Daya</p>
+    <div class="main-wrapper">
+
+        <div class="dashboard-fixed">
+            <div class="panel-left">
+                <header>
+                    <h2>PERHITUNGAN DAYA TURBIN</h2>
+                    <p>Sistem Estimasi Daya</p>
+                </header>
+                
+                <div class="field">
+                    <label>DEBIT ALIRAN (Q)</label>
+                    <div class="input-row">
+                        <input type="number" id="debit" value="0.00" step="0.01">
+                        <div class="spinner-btns">
+                            <button onclick="adjust('debit', 0.01)">▲</button>
+                            <button onclick="adjust('debit', -0.01)">▼</button>
+                        </div>
+                        <span class="unit">m³/s</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>HEAD TEKANAN (H)</label>
+                    <div class="input-row">
+                        <input type="number" id="head" value="0.00" step="0.1">
+                        <div class="spinner-btns">
+                            <button onclick="adjust('head', 0.1)">▲</button>
+                            <button onclick="adjust('head', -0.1)">▼</button>
+                        </div>
+                        <span class="unit">m</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>EFISIENSI (η)</label>
+                    <div class="input-row">
+                        <input type="number" id="efisiensi" value="0" step="1">
+                        <div class="spinner-btns">
+                            <button onclick="adjust('efisiensi', 1)">▲</button>
+                            <button onclick="adjust('efisiensi', -1)">▼</button>
+                        </div>
+                        <span class="unit">%</span>
+                    </div>
+                </div>
+
+                <button class="btn-hit" onclick="calculate()">HITUNG DAYA LISTRIK</button>
+                <div class="output">OUTPUT ENERGI (kW): <span id="result">0.00 kW</span></div>
+            </div>
+
+            <div class="panel-right">
+                <svg id="turbine-svg" viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="40" stroke="#38bdf8" stroke-width="2" fill="none"/>
+                    <path d="M100 30 L100 170 M30 100 L170 100" stroke="#38bdf8" stroke-width="3"/>
+                </svg>
+                <p id="turbine-status">TURBINE STATUS: IDLE</p>
+            </div>
+        </div>
+
+        <div class="pump-visualization-card">
+            <h3>🌸 VISUALISASI SISTEM POMPA</h3>
             
-            <div class="field">
-                <label>DEBIT ALIRAN (Q)</label>
-                <div class="input-row">
-                    <input type="number" id="debit" value="0.00" step="0.01">
-                    <div class="spinner-btns">
-                        <button onclick="adjust('debit', 0.01)">▲</button>
-                        <button onclick="adjust('debit', -0.01)">▼</button>
-                    </div>
-                    <span class="unit">m³/s</span>
+            <div class="pump-diagram">
+                <div class="tank">Sumber Air</div>
+                <div class="pipe">
+                    <div class="flow-animation" id="flow1"></div>
+                </div>
+                <div class="pump-icon" id="main-pump">⚙️</div>
+                <div class="pipe">
+                    <div class="flow-animation" id="flow2"></div>
+                </div>
+                <div class="tank">Tujuan</div>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-box">
+                    <div class="stat-label">Debit (Q)</div>
+                    <div class="stat-value"><span id="stat-q">0.00</span> m³/s</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Head (H)</div>
+                    <div class="stat-value"><span id="stat-h">0.00</span> m</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Efisiensi (η)</div>
+                    <div class="stat-value"><span id="stat-eff">0</span> %</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Daya (P)</div>
+                    <div class="stat-value"><span id="stat-p">0.00</span> kW</div>
                 </div>
             </div>
 
-            <div class="field">
-                <label>HEAD TEKANAN (H)</label>
-                <div class="input-row">
-                    <input type="number" id="head" value="0.00" step="0.1">
-                    <div class="spinner-btns">
-                        <button onclick="adjust('head', 0.1)">▲</button>
-                        <button onclick="adjust('head', -0.1)">▼</button>
-                    </div>
-                    <span class="unit">m</span>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>EFISIENSI (η)</label>
-                <div class="input-row">
-                    <input type="number" id="efisiensi" value="0" step="1">
-                    <div class="spinner-btns">
-                        <button onclick="adjust('efisiensi', 1)">▲</button>
-                        <button onclick="adjust('efisiensi', -1)">▼</button>
-                    </div>
-                    <span class="unit">%</span>
-                </div>
-            </div>
-
-            <button class="btn-hit" onclick="calculate()">HITUNG DAYA LISTRIK</button>
-            <div class="output">OUTPUT ENERGI (kW): <span id="result">0.00 kW</span></div>
+            <p class="note">Semakin besar debit dan head pompa, semakin besar daya listrik yang dibutuhkan. Semakin tinggi efisiensi, daya listrik yang diperlukan semakin kecil.</p>
         </div>
 
-        <div class="panel-right">
-            <svg id="turbine-svg" viewBox="0 0 200 200">
-                <circle cx="100" cy="100" r="40" stroke="#38bdf8" stroke-width="2" fill="none"/>
-                <path d="M100 30 L100 170 M30 100 L170 100" stroke="#38bdf8" stroke-width="3"/>
-            </svg>
-            <p id="turbine-status">TURBINE STATUS: IDLE</p>
-        </div>
-    </div>
-
-    <div class="pump-visualization-card">
-        <h3>VISUALISASI SISTEM POMPA</h3>
-        
-        <div class="pump-diagram">
-            <div class="tank">Sumber Air</div>
-            <div class="pipe">
-                <div class="flow-animation"></div>
-            </div>
-            <div class="pump-icon">⚙️</div>
-            <div class="pipe">
-                <div class="flow-animation"></div>
-            </div>
-            <div class="tank">Tujuan</div>
-        </div>
-
-        <div class="stats-row">
-            <div class="stat-box">Debit (Q): <span id="stat-q">0.00</span> m³/s</div>
-            <div class="stat-box">Head (H): <span id="stat-h">0.00</span> m</div>
-            <div class="stat-box">Efisiensi (η): <span id="stat-eff">0</span> %</div>
-            <div class="stat-box">Daya (P): <span id="stat-p">0.00</span> kW</div>
-        </div>
-
-        <p class="note">Semakin besar debit dan head pompa, semakin besar daya listrik yang dibutuhkan. Semakin tinggi efisiensi, daya listrik yang diperlukan semakin kecil.</p>
     </div>
 
     <script src="script.js"></script>

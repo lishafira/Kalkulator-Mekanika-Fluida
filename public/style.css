@@ -1,77 +1,303 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Orbitron', sans-serif; color: #38bdf8; }
-body { background: #0b0f19; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-
-.dashboard { 
-    display: grid; grid-template-columns: 350px 400px; gap: 40px;
-    background: #131a2c; padding: 40px; border-radius: 20px; 
-    border: 1px solid #38bdf8; box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Orbitron', sans-serif !important; 
 }
 
-.input-group { margin-bottom: 20px; }
-.input-field { 
-    display: flex; align-items: center; background: #0f172a; 
-    border: 1px solid #38bdf8; border-radius: 5px; padding: 10px; margin-top: 5px;
-}
-input { background: none; border: none; width: 100%; outline: none; font-size: 1rem; }
-.spinner { display: flex; flex-direction: column; }
-.spinner button { background: none; border: none; font-size: 8px; cursor: pointer; color: #38bdf8; }
-
-.btn-calc { 
-    width: 100%; padding: 15px; background: transparent; 
-    border: 1px solid #38bdf8; cursor: pointer; font-weight: bold;
-}
-.btn-calc:hover { background: rgba(56, 189, 248, 0.1); }
-
-.visualizer { display: flex; flex-direction: column; align-items: center; justify-content: center; }
-#turbine-svg { width: 250px; height: 250px; filter: drop-shadow(0 0 10px #38bdf8); }
-
-.spinning {
-    animation: spin 2s linear infinite;
-    transform-origin: center;
-    transform-box: fill-box; 
+body { 
+    background-color: #0b0f19; 
+    min-height: 100vh; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 40px 10px;
 }
 
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+/* Pembungkus Vertikal Utama */
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
 }
-@media (max-width: 768px) {
-    .dashboard { grid-template-columns: 1fr; width: 100%; padding: 20px; }
-    .visualizer { order: -1; }
-    #turbine-svg { width: 180px; height: 180px; }
+
+.dashboard-fixed { 
+    width: 800px; 
+    height: 420px; 
+    background-color: #131a2c; 
+    border: 1px solid #38bdf8; 
+    border-radius: 15px; 
+    display: flex; 
+    padding: 30px; 
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+}
+
+.panel-left { 
+    width: 380px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+}
+
+.panel-left h2 { font-size: 1.4rem; color: #38bdf8; font-weight: bold; }
+.panel-left p { font-size: 0.8rem; color: #38bdf8; margin-bottom: 10px; }
+
+.field label { font-size: 0.7rem; color: #38bdf8; letter-spacing: 1px; font-weight: bold; }
+
+.input-row { 
+    display: flex; 
+    align-items: center; 
+    background: #0f172a; 
+    border: 1px solid #38bdf8; 
+    padding: 8px 12px; 
+    border-radius: 5px; 
+    margin-top: 4px; 
+}
+
+.input-row input { 
+    background: none; 
+    border: none; 
+    color: #ffffff; 
+    width: 100%; 
+    outline: none; 
+    font-size: 1rem; 
+}
+
+.input-row input::-webkit-outer-spin-button,
+.input-row input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.spinner-btns {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.spinner-btns button {
+    background: none;
+    border: none;
+    color: #38bdf8;
+    font-size: 10px;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.spinner-btns button:hover { color: #ffffff; }
+.unit { color: #38bdf8; font-size: 0.85rem; font-weight: bold; }
+
+.btn-hit { 
+    width: 100%; 
+    padding: 12px; 
+    background: transparent; 
+    border: 1px solid #38bdf8; 
+    color: #38bdf8;
+    cursor: pointer; 
+    font-weight: bold; 
+    margin-top: 8px; 
+    transition: 0.3s;
+}
+.btn-hit:hover { background: rgba(56, 189, 248, 0.1); color: #fff; }
+
+.output {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #38bdf8;
+    font-weight: bold;
+}
+.output span { color: #ffffff; }
+
+.panel-right { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 15px;
+}
+
+#turbine-svg { 
+    width: 200px; 
+    height: 200px; 
+    stroke: #38bdf8;
+    filter: drop-shadow(0 0 10px #38bdf8); 
+}
+
+#turbine-status { font-size: 0.85rem; color: #38bdf8; font-weight: bold; }
+
+.spinning { 
+    animation: spin 2s linear infinite; 
+    transform-origin: center; 
+    transform-box: fill-box;
+}
+@keyframes spin { 
+    from { transform: rotate(0deg); } 
+    to { transform: rotate(360deg); } 
+}
+
+
+.pump-visualization-card {
+    width: 800px;
+    background-color: #fff0f5; 
+    border: 1px solid #ffb6c1;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
+}
+
+.pump-visualization-card h3 {
+    color: #d10047;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.pump-diagram {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ffdede;
+    margin-bottom: 20px;
+}
+
+.tank {
+    background: #ffcbd7;
+    color: #d10047;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
 }
 
 .pipe {
-    width: 100px;
-    height: 20px;
+    flex: 1;
+    height: 16px;
     background: #e0e0e0;
+    margin: 0 10px;
     position: relative;
-    overflow: hidden; 
-    border-radius: 10px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }
 
 .flow-animation {
-    width: 20px;
+    width: 30px;
     height: 100%;
-    background: #416bdf;
+    background: #ff6b8b;
     position: absolute;
-    left: -20px;
-    animation: flowMove 2s linear infinite;
+    left: -30px;
+    border-radius: 4px;
 }
 
-@keyframes flowMove {
-    0% { left: -20px; }
+.flowing {
+    animation: pipeFlow 1.5s linear infinite;
+}
+@keyframes pipeFlow {
+    0% { left: -30px; }
     100% { left: 100%; }
 }
 
 .pump-icon {
-    font-size: 40px;
-    animation: rotatePump 3s linear infinite;
+    font-size: 36px;
+    display: inline-block;
 }
 
-@keyframes rotatePump {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+.pump-spinning {
+    animation: spin 1.5s linear infinite;
+}
+
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-box {
+    background: #ffffff;
+    border: 1px solid #ffcbd7;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 0.65rem;
+    color: #8c8c8c;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: 0.95rem;
+    color: #d10047;
+    font-weight: bold;
+}
+
+.note {
+    font-size: 0.75rem;
+    color: #d10047;
+    background: #ffe4e8;
+    padding: 12px;
+    border-radius: 6px;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    body { padding: 20px 10px; }
+    
+    .main-wrapper { width: 100%; gap: 20px; }
+    .dashboard-fixed {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        gap: 25px;
+        padding: 20px;
+    }
+
+    .panel-left { width: 100%; }
+    .panel-right { order: -1; margin-bottom: 10px; } 
+    #turbine-svg { width: 160px; height: 160px; }
+
+    .pump-visualization-card {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .pump-diagram {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 5px;
+    }
+
+    .pipe {
+        width: 16px;
+        height: 50px;
+        margin: 5px 0;
+    }
+
+    .flow-animation {
+        width: 100%;
+        height: 20px;
+        top: -20px;
+        left: 0;
+    }
+
+    .flowing {
+        animation: pipeFlowVertical 1.5s linear infinite;
+    }
+    @keyframes pipeFlowVertical {
+        0% { top: -20px; }
+        100% { top: 100%; }
+    }
+
+    .stats-row {
+        grid-template-columns: repeat(2, 1fr); 
+    }
 }
